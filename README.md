@@ -5,12 +5,16 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 
 In the past, I have worked with a startup Fanlytiks. Worked on their mobile & web in-house analytics SDKs, mobile apps, web apps.
 
-- 🌱 I’m currently learning -
-[SwiftUI - Stanford University's course CS193p(Developing Applications for iOS using SwiftUI)](https://cs193p.sites.stanford.edu/)
-[ANDROID IN KOTLIN](http://developer.android.com/courses/)
+#### I’m currently learning 🌱
+- [SwiftUI - Stanford University's course CS193p(Developing Applications for iOS using SwiftUI)](https://cs193p.sites.stanford.edu/)
+- [ANDROID IN KOTLIN](http://developer.android.com/courses/)
 
-- 📚 I have made a complete list  of resources which I prefer. You can check it here: [Learning Resources](https://github.com/MKS-01/learning-resources)
+- I have made a complete list  of resources which I prefer. You can check it here: [Learning Resources](https://github.com/MKS-01/learning-resources)
 
+#### Current Reading  List 📚 
+- [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems Book by Martin Kleppmann](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
+- [O’Reilly Web Application Security by Andrew Hoffman](https://www.oreilly.com/library/view/web-application-security/9781492053101/)
+- [Before You Start Up: How to Prepare to Make Your Startup Dream a Reality](https://www.goodreads.com/book/show/36563581-before-you-start-up)
 
 
 #### STACKS I PREFERs ||  LOVEs || KNOWs - 2020 
