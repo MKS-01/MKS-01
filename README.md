@@ -1,6 +1,6 @@
 ### Hey, I'm MKS 👽
 
-On week ~~days~~ nights I'm a developer. And on weekends, becomes a security researcher, or if not, then you can find me playing 🎮 GOD OF WAR 4 or DEVIL MAY CRY 5. Love to builds & always open for new challenges. Not, just front & back end. But, complete Life Cycle. Converting the prototype into the product. Tools and technologies? As such no barriers till now.
+On week ~~days~~ nights I'm a developer. And on weekends, becomes a security researcher, or if not, then you can find me 🎮 GOD OF WAR 4 or DEVIL MAY CRY 5. Love to builds & always open for new challenges. Not, just front & back end. But, complete Life Cycle. Converting the prototype into the product. Tools and technologies? As such no barriers till now.
 
 
 In the past, I have worked with a startup Fanlytiks. Worked on their mobile & web in-house analytics SDKs, mobile apps, web apps.
