@@ -39,6 +39,8 @@ In the past, I have worked with a startup Fanlytiks. Worked on their mobile & we
 
 - API integation: GraphQL API, RESTful API, GRPC
 
+- IoT: Arduino, Raspberry pi 
+
 #### Tools: 
 
 VSC, Atom, XCODE, Android Studio, Chrome Dev tools, Docker, iTerm (Oh My Zsh), Postman, GraphQL Playground, Flipper;
