@@ -47,20 +47,31 @@ MacBook Pro 13 | iPhone 11 | Samsung Galaxy A8+
 
 [Curriculum Vitae](https://github.com/MKS-01/cv)
 
-<div>
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/js.png" alt="JavaScript" width="120" height="120">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/swift.png" alt="Swift" width="120" height="120">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/nodejs.png" alt="Node" width="120" height="120">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/graphql.png" alt="GraphQL" width="120" height="120">
+<!--
+![MKS's github stats](https://github-readme-stats.vercel.app/api?username=MKS-01&show_icons=true&theme=dark)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=MKS-01&layout=compact&theme=dark)
+![MKS's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=mks&theme=dark)
+-->
+
+<div align="center">
+    <p align="left">
+      <img src="https://github-readme-stats.vercel.app/api?username=MKS-01&show_icons=true&theme=dark" alt="GitHub stats" width="420"/>&nbsp;<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MKS-01&layout=compact&theme=dark" alt="Top Languages" height="165">
+    </p>
 </div>
 
+
+
+
+
 <div>
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/react.png" alt="React" width="120" height="120">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/xcode.png" alt="Xcode" width="120" height="120">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/android.png" alt="Android" width="120" height="120">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/vsc.png" alt="VSC" width="120" height="120">
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/js.png" alt="JavaScript" width="48" height="48" >&nbsp;
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/swift.png" alt="Swift" width="48" height="48"  >&nbsp;
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/nodejs.png" alt="Node" width="48" height="48">&nbsp;
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/graphql.png" alt="GraphQL" width="48" height="48">&nbsp;
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/react.png" alt="React" width="48" height="48">&nbsp;
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/xcode.png" alt="Xcode" width="48" height="48">&nbsp;
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/android.png" alt="Android" width="48" height="48">&nbsp;
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/vsc.png" alt="VSC" width="48" height="48">
 </div>
-
-
 
 
