@@ -19,7 +19,7 @@ In the past, I have worked with a startup Fanlytiks. Worked on their mobile & we
 
 #### STACKS I PREFERs ||  LOVEs || KNOWs - 2020 
 
-- Frontend: CSR React.js; SSR Next.js 
+- Frontend: CSR React.js; SSR Next.js && (State Management: Hooks, Context Api, Redux) 
 
 - Mobile: React-Native, android (java), iOS (Swift, ~~Obj-C~~)
 
