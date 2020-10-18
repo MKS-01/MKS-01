@@ -35,7 +35,7 @@ In the past, I have worked with a startup Fanlytiks. Worked on their mobile & we
 
 - langauge/scripts: JavaScript, Java, Swift, Python, Kotlin, ~~C, C++,Obj-C, Bash Scripting~~
 
-- CSS: styled-components, SCSS, css-module
+- CSS: styled-components, Sass, css-module
 
 - API integation: GraphQL API, RESTful API, GRPC
 
