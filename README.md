@@ -6,8 +6,13 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 In the past, I have worked with a startup Fanlytiks. Worked on their mobile & web in-house analytics SDKs, mobile apps, web apps.
 
 #### I’m currently learning 🌱
+- [CS50’s
+Introduction to Artificial Intelligence with Python](https://cs50.harvard.edu/ai/2020/)
+
 - [SwiftUI - Stanford University's course CS193p(Developing Applications for iOS using SwiftUI)](https://cs193p.sites.stanford.edu/)
+
 - [ANDROID IN KOTLIN](http://developer.android.com/courses/)
+
 
 - I have made a complete list  of resources which I prefer. You can check it here: [Learning Resources](https://github.com/MKS-01/learning-resources)
 
