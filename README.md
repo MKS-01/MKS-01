@@ -11,7 +11,7 @@ Introduction to Artificial Intelligence with Python](https://cs50.harvard.edu/ai
 
 - [SwiftUI - Stanford University's course CS193p(Developing Applications for iOS using SwiftUI)](https://cs193p.sites.stanford.edu/)
 
-- [ANDROID IN KOTLIN](http://developer.android.com/courses/)
+<!-- - [ANDROID IN KOTLIN](http://developer.android.com/courses/)   -->
 
 
 - I have made a complete list  of resources which I prefer. You can check it here: [Learning Resources](https://github.com/MKS-01/learning-resources)
