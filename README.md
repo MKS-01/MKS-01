@@ -3,8 +3,6 @@
 On week ~~days~~ nights I'm a developer. And on weekends, becomes a security researcher, or if not, then you can find me 🎮 GOD OF WAR 4 or DEVIL MAY CRY 5. Love to builds & always open for new challenges. Not, just front & back end. But, complete Life Cycle. Converting the prototype into the product. Tools and technologies? As such no barriers till now.
 
 
-In the past, I have worked with a startup Fanlytiks. Worked on their mobile & web in-house analytics SDKs, mobile apps, web apps.
-
 #### I’m currently learning 🌱
 - [CS50’s
 Introduction to Artificial Intelligence with Python](https://cs50.harvard.edu/ai/2020/)
@@ -54,12 +52,7 @@ MacBook Pro 13 | iPhone 11 | Samsung Galaxy A8+
 
 [Curriculum Vitae](https://github.com/MKS-01/cv)
 
-<!--
-![MKS's github stats](https://github-readme-stats.vercel.app/api?username=MKS-01&show_icons=true&theme=dark)
-![MKS's github stats](https://github-readme-stats.vercel.app/api?username=MKS-01&show_icons=true&theme=dark&include_all_commits=true&count_private=true)
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=MKS-01&layout=compact&theme=dark)
-![MKS's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=mks&theme=dark)
--->
+
 
 
 <div align="center">
