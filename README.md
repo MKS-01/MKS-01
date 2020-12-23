@@ -10,7 +10,7 @@ Introduction to Artificial Intelligence with Python](https://cs50.harvard.edu/ai
 - [SwiftUI - Stanford University's course CS193p(Developing Applications for iOS using SwiftUI)](https://cs193p.sites.stanford.edu/)
 
 
-- I have made a complete list  of resources which I prefer. You can check it here: [Learning Resources](https://github.com/MKS-01/learning-resources)
+List  of resources which I prefer. You can check it here: [Learning Resources](https://github.com/MKS-01/learning-resources)
 
 #### Current Reading  List 📚 
 - [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems Book by Martin Kleppmann](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
