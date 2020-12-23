@@ -17,7 +17,7 @@ Introduction to Artificial Intelligence with Python](https://cs50.harvard.edu/ai
 #### Current Reading  List 📚 
 - [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems Book by Martin Kleppmann](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
 - [O’Reilly Web Application Security by Andrew Hoffman](https://www.oreilly.com/library/view/web-application-security/9781492053101/)
-- [Before You Start Up: How to Prepare to Make Your Startup Dream a Reality](https://www.goodreads.com/book/show/36563581-before-you-start-up)
+
 
 
 #### STACKS I PREFERs ||  LOVEs || KNOWs - 2020 
