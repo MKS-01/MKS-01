@@ -39,8 +39,8 @@ List  of resources which I prefer. You can check it here: [Learning Resources](h
 <img src="https://cdn.svgporn.com/logos/apollostack.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/raspberry-pi.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/arduino.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/vercel-icon.svg" width="48" height="48">
- </div>
+<img src="https://cdn.svgporn.com/logos/docker-icon.svg" width="48" height="48">
+</div>
 
 
 
