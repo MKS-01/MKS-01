@@ -24,14 +24,14 @@ List  of resources which I prefer. You can check it here: [Learning Resources](h
 </div>
 
 <div>
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/js.png" alt="JavaScript" width="48" height="48" >&nbsp;
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/swift.png" alt="Swift" width="48" height="48"  >&nbsp;
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/nodejs.png" alt="Node" width="48" height="48">&nbsp;
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/graphql.png" alt="GraphQL" width="48" height="48">&nbsp;
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/react.png" alt="React" width="48" height="48">&nbsp;
+<img src="https://cdn.svgporn.com/logos/javascript.svg" width="48" height="48" >&nbsp;
+<img src="https://cdn.svgporn.com/logos/swift.svg" alt="Swift" width="48" height="48"  >&nbsp;
+<img src="https://cdn.svgporn.com/logos/nodejs-icon.svg" alt="Node" width="48" height="48">&nbsp;
+<img src="https://cdn.svgporn.com/logos/graphql.svg" alt="GraphQL" width="48" height="48">&nbsp;
+<img src="https://cdn.svgporn.com/logos/react.svg" alt="React" width="48" height="48">&nbsp;
 <img src="https://github.com/MKS-01/MKS-01/blob/master/assets/xcode.png" alt="Xcode" width="48" height="48">&nbsp;
 <img src="https://github.com/MKS-01/MKS-01/blob/master/assets/android.png" alt="Android" width="48" height="48">&nbsp;
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/vsc.png" alt="VSC" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/visual-studio-code.svg" alt="VSC" width="48" height="48">
 </div>
 
 
