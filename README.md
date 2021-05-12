@@ -10,7 +10,7 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 
 <div>
 <img src="https://cdn.svgporn.com/logos/javascript.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/typescript-icon.svg" width="48" height="48">
+<!-- <img src="https://cdn.svgporn.com/logos/typescript-icon.svg" width="48" height="48"> -->
 <img src="https://cdn.svgporn.com/logos/swift.svg" alt="Swift" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/nodejs-icon.svg" alt="Node" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/graphql.svg" alt="GraphQL" width="48" height="48">
