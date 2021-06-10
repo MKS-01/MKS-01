@@ -15,7 +15,6 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 <img src="https://cdn.svgporn.com/logos/nodejs-icon.svg" alt="Node" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/graphql.svg" alt="GraphQL" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/react.svg" alt="React" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/nextjs-icon.svg" alt="Next.js" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/postgresql.svg" width="48" height="48">
 <img src="https://github.com/MKS-01/MKS-01/blob/master/assets/xcode.png" alt="Xcode" width="48" height="48">
 <img src="https://github.com/MKS-01/MKS-01/blob/master/assets/android.png" alt="Android" width="48" height="48">
@@ -23,7 +22,6 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 <img src="https://cdn.svgporn.com/logos/expo-icon.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/apollostack.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/raspberry-pi.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/arduino.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/docker-icon.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/aws.svg" width="48" height="48">
 </div>
