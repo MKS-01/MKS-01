@@ -8,6 +8,7 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
     </p>
 </div>
 
+#### Current
 <div>
 <img src="https://cdn.svgporn.com/logos/javascript.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/typescript-icon.svg" width="48" height="48">
@@ -24,7 +25,20 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 <img src="https://cdn.svgporn.com/logos/raspberry-pi.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/docker-icon.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/aws.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/insomnia.svg" width="48" height="48">
+    
 </div>
+
+#### Familiar or Used in the past
+<div>
+<img src="https://cdn.svgporn.com/logos/java.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/python.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/c.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/mysql.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/sass.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/platformio.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/arduino.svg" width="48" height="48">
+</div>   
 
 
 
