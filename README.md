@@ -8,12 +8,6 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
     </p>
 </div>
 
-<!-- ### 📚 Reading List
-<div>
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/IMG_2060.jpg" alt="book" width="252" height="336">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/IMG_8903.jpg" alt="book" width="252" height="336">
-</div> -->
-
 #### Current
 <div>
 <img src="https://cdn.svgporn.com/logos/javascript.svg" width="48" height="48">
@@ -48,6 +42,10 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 <img src="https://cdn.svgporn.com/logos/arduino.svg" width="48" height="48">
 </div>   
 
-
+### 📚 Reading List
+<div>
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/IMG_2060.jpg" alt="book" width="252" height="336">
+<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/IMG_8903.jpg" alt="book" width="252" height="336">
+</div>
 
 
