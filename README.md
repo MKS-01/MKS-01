@@ -36,6 +36,7 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 <img src="https://cdn.svgporn.com/logos/java.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/python.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/c.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/php.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/mysql.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/sass.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/platformio.svg" width="48" height="48">
