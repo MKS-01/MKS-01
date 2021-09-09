@@ -2,6 +2,17 @@
 
 On week ~~days~~ nights I'm a developer. And on weekends, becomes a security researcher, or if not, then you can find me 🎮 GOD OF WAR 4 or DEVIL MAY CRY 5. Love to builds & always open for new challenges.Converting the prototype into the product. Tools and technologies? As such no barriers till now.
 
+
+### 📚Current Reading List
+
+- [Designing Data-Intensive Applications by Martin Kleppmann](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
+- [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition by Aurélien Géron](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
+- [Node.js Design Patterns - Third Edition By Mario Casciaro , Luciano Mammino](https://www.packtpub.com/product/node-js-design-patterns-third-edition/9781839214110)
+- [Bug Bounty Bootcamp by Vickie Li](https://www.amazon.in/Bug-Bounty-Bootcamp-Reporting-Vulnerabilities-ebook/dp/B08YK368Y3)
+- [The Psychology of Money by Morgan Housel](https://www.amazon.in/Psychology-Money-Morgan-Housel-ebook/dp/B08FHZ5L47/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=&sr=)
+
+
+
 <div align="center">
     <p align="left">
       <img src="https://github-readme-stats.vercel.app/api?username=MKS-01&show_icons=true&theme=dark&include_all_commits=true&count_private=true" alt="GitHub stats" width="420"/>&nbsp;<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MKS-01&layout=compact&theme=dark&langs_count=7&hide=processing&card_width=320" alt="Top Languages" height="165">
@@ -45,10 +56,5 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 <img src="https://cdn.svgporn.com/logos/arduino.svg" width="48" height="48">
 </div>   
 
-<!-- ### 📚 Reading List
-<div>
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/IMG_2060.jpg" alt="book" width="252" height="336">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/IMG_8903.jpg" alt="book" width="252" height="336">
-</div>
- -->
+
 
