@@ -4,11 +4,11 @@ On week ~~days~~ nights I'm a developer. And on weekends, becomes a security res
 
 
 ### 📚Current Reading List
-
+- [Bug Bounty Bootcamp by Vickie Li](https://www.amazon.in/Bug-Bounty-Bootcamp-Reporting-Vulnerabilities-ebook/dp/B08YK368Y3)
 - [Designing Data-Intensive Applications by Martin Kleppmann](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
 - [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition by Aurélien Géron](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
 - [Node.js Design Patterns - Third Edition By Mario Casciaro , Luciano Mammino](https://www.packtpub.com/product/node-js-design-patterns-third-edition/9781839214110)
-- [Bug Bounty Bootcamp by Vickie Li](https://www.amazon.in/Bug-Bounty-Bootcamp-Reporting-Vulnerabilities-ebook/dp/B08YK368Y3)
+
 
 <div align="center">
     <p align="left">
