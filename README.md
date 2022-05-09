@@ -1,13 +1,13 @@
 ### Hey, I'm MKS 👽
 
-On week ~~days~~ nights I'm a developer. And on weekends, becomes a security researcher, or if not, then you can find me 🎮 GOD OF WAR 4 || DEVIL MAY CRY 5 || Call of Duty: Black Ops Cold War. Love to builds & always open for new challenges. Converting the prototype into the product. Tools and technologies? As such no barriers till now.
+On week ~~days~~ nights I'm a developer. And on weekends, exploring app security, or if not, then you can find me 🎮 GOD OF WAR 4 || DEVIL MAY CRY 5 || Call of Duty: Black Ops Cold War. Love to builds & always open for new challenges. Converting the prototype into the product. Tools and technologies? As such no barriers till now.
 
 
 ### 📚Current Reading List
 - [Bug Bounty Bootcamp by Vickie Li](https://www.amazon.in/Bug-Bounty-Bootcamp-Reporting-Vulnerabilities-ebook/dp/B08YK368Y3)
 - [Designing Data-Intensive Applications by Martin Kleppmann](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
-- [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition by Aurélien Géron](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
-- [Node.js Design Patterns - Third Edition By Mario Casciaro , Luciano Mammino](https://www.packtpub.com/product/node-js-design-patterns-third-edition/9781839214110)
+<!-- - [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition by Aurélien Géron](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
+- [Node.js Design Patterns - Third Edition By Mario Casciaro , Luciano Mammino](https://www.packtpub.com/product/node-js-design-patterns-third-edition/9781839214110) -->
 
 
 <div align="center">
