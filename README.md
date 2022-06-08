@@ -16,6 +16,11 @@ On week ~~days~~ nights I'm a developer. And on weekends, exploring app security
     </p>
 </div>
 
+#### 🧠 Learning:
+<div>
+<img src="https://cdn.svgporn.com/logos/go.svg" width="48" height="48">
+</div>
+
 #### 🛠 Languages and Tools:
 <div>
 <img src="https://cdn.svgporn.com/logos/javascript.svg" width="48" height="48">
@@ -29,17 +34,13 @@ On week ~~days~~ nights I'm a developer. And on weekends, exploring app security
 <img src="https://cdn.svgporn.com/logos/visual-studio-code.svg" alt="VSC" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/expo-icon.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/apollostack.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/raspberry-pi.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/docker-icon.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/aws.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/insomnia.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/postman-icon.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/postgresql.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/mongodb.svg" width="auto" height="48">
-    
 </div>
 
-#### Familiar or Used in the past
+#### 📝 Familiar or Used in the past
 <div>
 <img src="https://cdn.svgporn.com/logos/java.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/python.svg" width="48" height="48">
@@ -50,7 +51,10 @@ On week ~~days~~ nights I'm a developer. And on weekends, exploring app security
 <img src="https://cdn.svgporn.com/logos/mysql.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/sass.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/platformio.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/aws.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/insomnia.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/arduino.svg" width="48" height="48">
+<img src="https://cdn.svgporn.com/logos/raspberry-pi.svg" width="48" height="48">
 </div>   
 
 
