@@ -1,8 +1,5 @@
 ### Hey, I'm MKS 👽
 
-On week ~~days~~ nights I'm a developer. And on weekends, exploring app security, or if not, then you can find me 🎮 GOD OF WAR 4 || DEVIL MAY CRY 5 || Call of Duty: Black Ops Cold War. Love to builds & always open for new challenges. Converting the prototype into the product. Tools and technologies? As such no barriers till now.
-
-
 ### 📚Current Reading List
 - [Bug Bounty Bootcamp by Vickie Li](https://www.amazon.in/Bug-Bounty-Bootcamp-Reporting-Vulnerabilities-ebook/dp/B08YK368Y3)
 - [Designing Data-Intensive Applications by Martin Kleppmann](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
