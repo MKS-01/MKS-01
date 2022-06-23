@@ -6,6 +6,9 @@
 <!-- - [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition by Aurélien Géron](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
 - [Node.js Design Patterns - Third Edition By Mario Casciaro , Luciano Mammino](https://www.packtpub.com/product/node-js-design-patterns-third-edition/9781839214110) -->
 
+### TODO: 
+- [Mobile Hacking - hacker101 ](https://www.hacker101.com/playlists/mobile_hacking.html)
+
 
 <div align="center">
     <p align="left">
@@ -17,6 +20,7 @@
 <div>
 <img src="https://cdn.svgporn.com/logos/go.svg" width="48" height="48">
 </div>
+
 
 #### 🛠 Languages and Tools:
 <div>
