@@ -56,11 +56,15 @@
 </div>   
 <br/>
 <br/>
-<div align="center">
-    <p align="left">
-      <img src="https://github-readme-stats.vercel.app/api?username=MKS-01&show_icons=true&theme=dark&include_all_commits=true&count_private=true" alt="GitHub stats" width="420"/>&nbsp;<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MKS-01&layout=compact&theme=dark&langs_count=10&hide=processing,starlark,html,glsl,vue,ruby,dockerfile&card_width=320" alt="Top Languages" height="165">
-    </p>
-</div>
+
+<!--
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=mks-01&theme=dracula)](https://git.io/streak-stats)
+<br/>
+<img src="https://github-readme-stats.vercel.app/api?username=MKS-01&show_icons=true&theme=dracula&include_all_commits=true&count_private=true" alt="GitHub stats"/>
+<br/>
+-->
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MKS-01&layout=compact&theme=dracula&langs_count=10&hide=processing,starlark,html,glsl,vue,ruby,dockerfile&card_width=320" alt="Top Languages"/>
+
 
 
 
