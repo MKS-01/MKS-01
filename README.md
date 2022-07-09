@@ -16,31 +16,34 @@
 </div>
 
 
-#### 🛠 Languages and Tools:
+#### 🛠 Languages || Frameworks ||  Tools:
 <div>
-<img src="https://cdn.svgporn.com/logos/javascript.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/typescript-icon.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/swift.svg" alt="Swift" width="48" height="48">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"  width="48" height="48"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="48" height="48">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" width="48" height="48"/>         
 <img src="https://cdn.svgporn.com/logos/nodejs-icon.svg" alt="Node" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/graphql.svg" alt="GraphQL" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/react.svg" alt="React" width="48" height="48">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/xcode.png" alt="Xcode" width="48" height="48">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/android.png" alt="Android" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/visual-studio-code.svg" alt="VSC" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/expo-icon.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/apollostack.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/docker-icon.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/postman-icon.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/postgresql.svg" width="48" height="48">
-<img src="https://cdn.svgporn.com/logos/mongodb.svg" width="auto" height="48">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg" width="48" height="48" />
+<img src="https://cdn.svgporn.com/logos/postgresql.svg" width="48" height="48">          
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-plain.svg"  width="48" height="48"/>
+<img src="https://cdn.svgporn.com/logos/expo-icon.svg" width="48" height="48"> 
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" width="48" height="48"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xcode/xcode-original.svg" width="48" height="48"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="48" height="48"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"  width="48" height="48"/>
 </div>
+
 
 #### 📝 Familiar or Used in the past
 <div>
 <img src="https://cdn.svgporn.com/logos/java.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/python.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/c.svg" width="48" height="48">
-<img src="https://github.com/MKS-01/MKS-01/blob/master/assets/obj-c.png" alt="iroha" width="auto" height="48">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/objectivec/objectivec-plain.svg" width="48" height="48"/>
 <img src="https://github.com/MKS-01/MKS-01/blob/master/assets/iroha.png" alt="iroha" width="auto" height="48">
 <img src="https://cdn.svgporn.com/logos/php.svg" width="48" height="48">
 <img src="https://cdn.svgporn.com/logos/mysql.svg" width="48" height="48">
