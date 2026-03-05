@@ -16,9 +16,7 @@ func main() {
 
 <samp>
 
-```
-› d3pl0y3d fr0m m4rs. 5t1ll l34rn1ng hum4n pr0t0c0ls.
-```
+[`› d3pl0y3d fr0m m4rs. 5t1ll l34rn1ng hum4n pr0t0c0ls.`](assets/1772745253857.jpeg)
 
 </samp>
 
@@ -28,9 +26,6 @@ func main() {
 <a href="#"><img src="https://img.shields.io/badge/-71nk3r3r-38bdf8?style=for-the-badge&logoColor=white" /></a>
 </samp>
 
-</td>
-<td valign="top" width="220" align="right">
-  <img src="assets/1772745253857.jpeg" width="200" />
 </td>
 </tr>
 </table>
