@@ -14,8 +14,7 @@ func main() {
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=12&duration=3000&pause=1000&color=4fc3f7&vCenter=true&width=450&height=20&lines=%E2%80%BA+d3pl0y3d+fr0m+m4rs.+5t1ll+l34rn1ng+hum4n+pr0t0c0ls." />
 </a>
 
-<samp>
+
 <a href="#"><img src="https://img.shields.io/badge/-m0b1l3-1e3a5f?style=for-the-badge&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/-s3cur1ty-2563eb?style=for-the-badge&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/-71nk3r3r-38bdf8?style=for-the-badge&logoColor=white" /></a>
-</samp>
