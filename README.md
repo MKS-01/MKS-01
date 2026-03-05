@@ -1,3 +1,7 @@
+<table>
+<tr>
+<td valign="top">
+
 # 👽「  M K S  」
 
 <a href="#">
@@ -13,7 +17,24 @@ func main() {
 ---
 
 <samp>
+
+```
+› d3pl0y3d fr0m m4rs. 5t1ll l34rn1ng hum4n pr0t0c0ls.
+```
+
+</samp>
+
+---
+
+<samp>
 <a href="#"><img src="https://img.shields.io/badge/-m0b1l3-1e3a5f?style=for-the-badge&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/-s3cur1ty-2563eb?style=for-the-badge&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/-71nk3r3r-38bdf8?style=for-the-badge&logoColor=white" /></a>
 </samp>
+
+</td>
+<td width="220" valign="top" align="right">
+  <img src="assets/1772745253857.jpeg" width="200" style="max-width:100%" />
+</td>
+</tr>
+</table>
