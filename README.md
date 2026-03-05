@@ -1,4 +1,4 @@
-<table border="0" cellspacing="0" cellpadding="0" width="70%">
+<table border="0" cellspacing="0" cellpadding="10">
 <tr>
 <td valign="top">
 
@@ -14,8 +14,6 @@ func main() {
 }
 ```
 
----
-
 <samp>
 
 ```
@@ -24,8 +22,6 @@ func main() {
 
 </samp>
 
----
-
 <samp>
 <a href="#"><img src="https://img.shields.io/badge/-m0b1l3-1e3a5f?style=for-the-badge&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/-s3cur1ty-2563eb?style=for-the-badge&logoColor=white" /></a>
@@ -33,8 +29,8 @@ func main() {
 </samp>
 
 </td>
-<td width="220" valign="top" align="right">
-  <img src="assets/1772745253857.jpeg" width="200" style="max-width:100%" />
+<td valign="top" width="220" align="right">
+  <img src="assets/1772745253857.jpeg" width="200" />
 </td>
 </tr>
 </table>
