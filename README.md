@@ -23,4 +23,4 @@ func main() {
 
 <img src="https://streak-stats.demolab.com/?user=MKS-01&theme=transparent&hide_border=true&ring=58a6ff&fire=58a6ff&currStreakLabel=58a6ff&sideLabels=8b949e&dates=8b949e&stroke=30363d" />
 
-<img src="https://skillicons.dev/icons?i=js,ts,go,java,cpp,swift&theme=dark" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MKS-01&layout=compact&bg_color=0d1117&hide_border=true&title_color=58a6ff&text_color=8b949e&langs_count=8&size_weight=0.5&count_weight=0.5" />
