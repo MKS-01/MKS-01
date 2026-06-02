@@ -18,3 +18,9 @@ func main() {
 <a href="#"><img src="https://img.shields.io/badge/-m0b1l3-1e3a5f?style=for-the-badge&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/-s3cur1ty-2563eb?style=for-the-badge&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/-71nk3r3r-38bdf8?style=for-the-badge&logoColor=white" /></a>
+
+<br/>
+
+<img src="https://streak-stats.demolab.com/?user=MKS-01&theme=transparent&hide_border=true&ring=58a6ff&fire=58a6ff&currStreakLabel=58a6ff&sideLabels=8b949e&dates=8b949e&stroke=30363d" />
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MKS-01&layout=compact&theme=transparent&hide_border=true&title_color=58a6ff&text_color=8b949e&langs_count=6" />
