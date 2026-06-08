@@ -23,4 +23,4 @@ func main() {
 
 <img src="https://streak-stats.demolab.com/?user=MKS-01&theme=transparent&hide_border=true&ring=58a6ff&fire=58a6ff&currStreakLabel=58a6ff&sideLabels=8b949e&dates=8b949e&stroke=30363d" />
 
-<img src="https://skillicons.dev/icons?i=js,ts,java,go,cpp,py,kotlin,bash&theme=dark" width="280" />
+<img src="https://skillicons.dev/icons?i=ts,go,cpp,py,swift,kotlin,js,bash,java&theme=dark" width="280" />
