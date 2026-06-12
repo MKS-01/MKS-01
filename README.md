@@ -29,5 +29,4 @@ languages I picked up in my early days out of pure curiosity — now it's time t
 
 **🔧 tinkering**
 - [pizow](https://github.com/MKS-01/pizow) — Pi Zero 2W home server
-- wearable reverse engineering — poking at BLE protocols of fitness trackers
 - [mobile-recon](https://github.com/MKS-01/mobile-recon) — mobile app recon tooling in Go
