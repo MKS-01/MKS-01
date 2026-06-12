@@ -21,6 +21,13 @@ func main() {
 
 <br/>
 
-<img src="https://streak-stats.demolab.com/?user=MKS-01&theme=transparent&hide_border=true&ring=58a6ff&fire=58a6ff&currStreakLabel=58a6ff&sideLabels=8b949e&dates=8b949e&stroke=30363d" />
+languages I picked up in my early days out of pure curiosity — now it's time to pick them up again and explore with agentic coding:
 
-<img src="https://skillicons.dev/icons?i=ts,go,cpp,py,swift,kotlin,js,bash,java&theme=dark" width="280" />
+<img src="https://img.shields.io/badge/TypeScript-1e3a5f?style=flat&logo=typescript&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Go-1e3a5f?style=flat&logo=go&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/C++-1e3a5f?style=flat&logo=cplusplus&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Python-1e3a5f?style=flat&logo=python&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Swift-1e3a5f?style=flat&logo=swift&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Kotlin-1e3a5f?style=flat&logo=kotlin&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/JavaScript-1e3a5f?style=flat&logo=javascript&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Bash-1e3a5f?style=flat&logo=gnubash&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Java-1e3a5f?style=flat&logo=openjdk&logoColor=58a6ff" />
+
+**🔭 ongoing** — [readback](https://github.com/MKS-01/readback) · terminal-first offline article reader. paste a URL, hear the whole article in a natural neural voice — 100% on-device on Apple Silicon. no cloud, no API keys.
+
+**🔧 tinkering**
+- [pizow](https://github.com/MKS-01/pizow) — Pi Zero 2W home server
+- wearable reverse engineering — poking at BLE protocols of fitness trackers
+- [mobile-recon](https://github.com/MKS-01/mobile-recon) — mobile app recon tooling in Go
