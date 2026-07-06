@@ -19,13 +19,13 @@ func main() {
 <a href="#"><img src="https://img.shields.io/badge/-s3cur1ty-2563eb?style=for-the-badge&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/-71nk3r3r-38bdf8?style=for-the-badge&logoColor=white" /></a>
 
-<br/>
+<img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=typescript&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=go&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=cplusplus&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=python&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=swift&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=kotlin&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=javascript&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=gnubash&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/-1e3a5f?style=flat&logo=openjdk&logoColor=58a6ff" />
 
-old curiosities, new experiments.
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=4000&pause=100000&color=58a6ff&vCenter=true&multiline=false&width=950&height=24&lines=old+curiosities%2C+new+experiments+%E2%80%94+held+together+with+duct+tape+and+caffeine." />
 
-<img src="https://img.shields.io/badge/TypeScript-1e3a5f?style=flat&logo=typescript&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Go-1e3a5f?style=flat&logo=go&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/C++-1e3a5f?style=flat&logo=cplusplus&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Python-1e3a5f?style=flat&logo=python&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Swift-1e3a5f?style=flat&logo=swift&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Kotlin-1e3a5f?style=flat&logo=kotlin&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/JavaScript-1e3a5f?style=flat&logo=javascript&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Bash-1e3a5f?style=flat&logo=gnubash&logoColor=58a6ff" /> <img src="https://img.shields.io/badge/Java-1e3a5f?style=flat&logo=openjdk&logoColor=58a6ff" />
-
-current builds, weekend hacks.
-
-- [readback](https://github.com/MKS-01/readback) — offline article reader for macOS — paste a URL, listen on-device.
-- [pizow](https://github.com/MKS-01/pizow) — Pi Zero 2W home server
+<pre>
+$ ls ~/weekend-hacks
+<a href="https://github.com/MKS-01/readback">readback</a>         turn any article into an audiobook — paste a URL, listen on-device.
+<a href="https://github.com/MKS-01/pizow">pizow</a>            turn a $15 Pi Zero into a home server — deploy scripts, live dashboards, NAS.
+<a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>  turn a spare Mac into a GPU — LLM serving and clustering on Apple Silicon, powered by MLX.
+</pre>
