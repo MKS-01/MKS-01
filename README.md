@@ -28,3 +28,5 @@ $ ls ~/weekend-hacks
 <a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>  turn a spare Mac into a GPU — LLM serving and clustering on Apple Silicon, powered by MLX.
 <a href="https://github.com/MKS-01/lokalgrid">lokalgrid</a>        off-grid group chat and live map — one LoRa board, no internet.
 </pre>
+
+read more about this weekend hack here → <a href="https://mks-01.github.io/whoami/#blog">mks-01.github.io/whoami#blog</a>
