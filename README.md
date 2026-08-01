@@ -26,4 +26,5 @@ $ ls ~/weekend-hacks
 <a href="https://github.com/MKS-01/readback">readback</a>         turn any article into an audiobook — paste a URL, listen on-device.
 <a href="https://github.com/MKS-01/pizow">pizow</a>            turn a $15 Pi Zero into a home server — deploy scripts, live dashboards, NAS.
 <a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>  turn a spare Mac into a GPU — LLM serving and clustering on Apple Silicon, powered by MLX.
+<a href="https://github.com/MKS-01/lokalgrid">lokalgrid</a>        off-grid group chat and live map — one LoRa board, no internet.
 </pre>
