@@ -15,7 +15,7 @@ func main() {
 </a>
  -->
 
-`m0b1l3` `s3cur1ty` `71nk3r3r`
+`m0b1l3` `s3cur1ty` `71nk3r3r` `bu1ld3r`
 
 <img height="20" src="https://cdn.simpleicons.org/typescript/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/go/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/cplusplus/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/python/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/swift/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/kotlin/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/javascript/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/gnubash/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/openjdk/58a6ff" />
 
