@@ -23,6 +23,7 @@ func main() {
 
 <pre>
 $ ls ~/weekend-hacks
+<a href="https://github.com/MKS-01/duskread">duskread</a>         a reading habit, automated around a Notion database — KMP app with feeds, offline reading, and a pomodoro timer.
 <a href="https://github.com/MKS-01/readback">readback</a>         turn any article into an audiobook — paste a URL, listen on-device.
 <a href="https://github.com/MKS-01/pizow">pizow</a>            turn a $15 Pi Zero into a home server — deploy scripts, live dashboards, NAS.
 <a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>  turn a spare Mac into a GPU — LLM serving and clustering on Apple Silicon, powered by MLX.
