@@ -25,25 +25,16 @@ func main() {
 $ ls ~/weekend-hacks
 
 <a href="https://github.com/MKS-01/duskread">duskread</a>
-    a reading habit, automated around a Notion database — KMP app
-    with feeds, offline reading, and a pomodoro timer.
-
+    a reading habit, automated around a Notion database — KMP app.
 <a href="https://github.com/MKS-01/readback">readback</a>
-    paste a URL, get an audiobook — any article, read aloud,
-    listened on-device.
-
+    paste a URL, get an audiobook — read aloud, on-device.
 <a href="https://github.com/MKS-01/pizow">pizow</a>
-    a $15 Pi Zero as a home server — deploy scripts, live
-    dashboards, NAS.
-
+    a $15 Pi Zero as a home server — deploy scripts, NAS.
 <a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>
-    a spare Mac reborn as a GPU — LLM serving and clustering on
-    Apple Silicon, powered by MLX.
-
+    a spare Mac reborn as a GPU — LLM serving via MLX.
 <a href="https://github.com/MKS-01/lokalgrid">lokalgrid</a>
-    off-grid group chat and live map — one LoRa board, no
-    internet.
+    off-grid group chat and live map — one LoRa board.
 
-$ open <a href="https://mks-01.github.io/whoami/#blog">mks-01.github.io/whoami#blog</a>
-    read more about this weekend hack here.
+$ open <a href="https://mksbrew.dev/#blogs">mksbrew.dev/#blogs</a>
+    read more about these weekend hacks here.
 </pre>
