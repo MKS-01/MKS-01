@@ -28,8 +28,6 @@ $ ls ~/weekend-hacks
     a reading habit, automated around a Notion database — KMP app.
 <a href="https://github.com/MKS-01/readback">readback</a>
     paste a URL, get an audiobook — read aloud, on-device.
-<a href="https://github.com/MKS-01/pizow">pizow</a>
-    a $15 Pi Zero as a home server — deploy scripts, NAS.
 <a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>
     a spare Mac reborn as a GPU — LLM serving via MLX.
 <a href="https://github.com/MKS-01/lokalgrid">lokalgrid</a>
