@@ -23,7 +23,7 @@ $ ls ~/weekend-hacks
 <a href="https://github.com/MKS-01/readback">readback</a>
 <a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>
 
-$ open <a href="https://mksbrew.dev/#blogs">mksbrew.dev/#blogs</a>
+$ open <a href="https://mksbrew.dev/#blogs">mksbrew.dev/#blogs</a> for more on these
 </pre>
 
 <br clear="left"/>
