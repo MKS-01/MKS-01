@@ -14,8 +14,8 @@ import unicodedata
 
 # Selected per scheme, not one value reused: the old #58a6ff sat at 2.53:1 on
 # GitHub's light theme, under the 3:1 floor for graphics.
-ACCENT_DARK = "#39d353"
-ACCENT_LIGHT = "#116329"
+ACCENT_DARK = "#58a6ff"
+ACCENT_LIGHT = "#0969da"
 FONT = 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace'
 OUT_DIR = "assets"
 README = "README.md"

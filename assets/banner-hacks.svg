@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="710" height="23"
      viewBox="0 0 710 23" role="img" aria-label="old curiosities, new experiments — held together with duct tape and caffeine.">
   <style>
-    text { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 14px; fill: #39d353; }
+    text { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 14px; fill: #58a6ff; }
     @media (prefers-color-scheme: light) {
-      text { fill: #116329; }
+      text { fill: #0969da; }
     }
     tspan { animation: appear 90ms ease-out both; }
     @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
