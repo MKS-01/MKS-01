@@ -12,7 +12,10 @@ import os
 import re
 import unicodedata
 
-ACCENT = "#58a6ff"
+# Selected per scheme, not one value reused: the old #58a6ff sat at 2.53:1 on
+# GitHub's light theme, under the 3:1 floor for graphics.
+ACCENT_DARK = "#39d353"
+ACCENT_LIGHT = "#116329"
 FONT = 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace'
 OUT_DIR = "assets"
 README = "README.md"
@@ -67,7 +70,10 @@ def render(text, size):
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
      viewBox="0 0 {width} {height}" role="img" aria-label="{esc(text)}">
   <style>
-    text {{ font-family: {FONT}; font-size: {size}px; fill: {ACCENT}; }}
+    text {{ font-family: {FONT}; font-size: {size}px; fill: {ACCENT_DARK}; }}
+    @media (prefers-color-scheme: light) {{
+      text {{ fill: {ACCENT_LIGHT}; }}
+    }}
     tspan {{ animation: appear {FADE_MS}ms ease-out both; }}
     @keyframes appear {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
     @media (prefers-reduced-motion: reduce) {{

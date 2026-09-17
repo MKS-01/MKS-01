@@ -1,6 +1,6 @@
 ### 👽「  M K S  」
 
-<img src="assets/banner-top.svg?v=bbc825b42d" alt="coffee → code → tinker → repeat" />
+<img src="assets/banner-top.svg?v=1afac73920" alt="coffee → code → tinker → repeat" />
 
 ```swift
 func main() {
@@ -11,10 +11,10 @@ func main() {
 `m0b1l3` `s3cur1ty` `71nk3r3r` `bu1ld3r`
 
 <!-- langstats:start -->
-<img src="assets/langstats.svg?v=1d82b4e44b" alt="Languages ranked by use, most used first" />
+<img src="assets/langstats.svg?v=08130f51ea" alt="Languages ranked by use, most used first" />
 <!-- langstats:end -->
 
-<img src="assets/banner-hacks.svg?v=522808c7cc" alt="old curiosities, new experiments — held together with duct tape and caffeine." />
+<img src="assets/banner-hacks.svg?v=1fbdceec50" alt="old curiosities, new experiments — held together with duct tape and caffeine." />
 
 <pre>
 $ ls ~/weekend-hacks
