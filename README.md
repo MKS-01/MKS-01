@@ -18,7 +18,7 @@ func main() {
 `m0b1l3` `s3cur1ty` `71nk3r3r` `bu1ld3r`
 
 <!-- langstats:start -->
-<img src="assets/langstats.svg" alt="Languages ranked by use, most used first" />
+<img src="assets/langstats.svg?v=1376f692d6" alt="Languages ranked by use, most used first" />
 <!-- langstats:end -->
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=4000&pause=100000&color=58a6ff&vCenter=true&multiline=false&width=950&height=24&lines=old+curiosities%2C+new+experiments+%E2%80%94+held+together+with+duct+tape+and+caffeine." />

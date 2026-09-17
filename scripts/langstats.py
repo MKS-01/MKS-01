@@ -5,6 +5,7 @@ Talks only to api.github.com and rewrites the text between the langstats
 markers, so the README has no third-party render server in its critical path.
 """
 
+import hashlib
 import json
 import os
 import re
@@ -226,10 +227,15 @@ def render_svg(ranked, scanned, total_bytes):
 """
 
 
-def render_readme_block():
+def render_readme_block(svg):
+    # Browsers and GitHub's image proxy cache by URL, so a chart republished
+    # at a fixed path keeps serving the old bytes. Fingerprint the URL with
+    # the content hash: it only changes when the chart does, and when it
+    # changes nothing has cached it yet.
+    digest = hashlib.sha256(svg.encode("utf-8")).hexdigest()[:10]
     return "\n".join([
         START,
-        f'<img src="{SVG_PATH}" alt="Languages ranked by use, most used first" />',
+        f'<img src="{SVG_PATH}?v={digest}" alt="Languages ranked by use, most used first" />',
         END,
     ])
 
@@ -258,7 +264,7 @@ def main():
             fh.write(svg)
         changed = True
 
-    block = render_readme_block()
+    block = render_readme_block(svg)
 
     with open(README, encoding="utf-8") as fh:
         readme = fh.read()
