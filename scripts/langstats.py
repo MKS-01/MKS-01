@@ -25,6 +25,10 @@ INCLUDE_FORKS = False
 SIZE_WEIGHT = 0.85
 COUNT_WEIGHT = 0.15
 
+# This repo only contains the generator, so counting it would let the chart
+# measure itself. Names are matched case-insensitively.
+EXCLUDE_REPOS = {"mks-01"}
+
 # Build-system and markup noise that says nothing about what MKS writes.
 EXCLUDE = {
     "HTML", "CSS", "SCSS", "Makefile", "CMake", "Dockerfile", "Batchfile",
@@ -72,6 +76,8 @@ def collect():
             if repo["fork"] and not INCLUDE_FORKS:
                 continue
             if repo.get("archived") or repo.get("private"):
+                continue
+            if repo["name"].lower() in EXCLUDE_REPOS:
                 continue
             langs = api(f"/repos/{USER}/{repo['name']}/languages")
             langs = {k: v for k, v in langs.items() if k not in EXCLUDE}
