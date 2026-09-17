@@ -8,11 +8,6 @@ func main() {
 }
 ```
 
-<!-- <a href="#">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=12&duration=3000&pause=1000&color=4fc3f7&vCenter=true&width=450&height=20&lines=%E2%80%BA+d3pl0y3d+fr0m+m4rs.+5t1ll+l34rn1ng+hum4n+pr0t0c0ls." />
-</a>
- -->
-
 `m0b1l3` `s3cur1ty` `71nk3r3r` `bu1ld3r`
 
 <!-- langstats:start -->
