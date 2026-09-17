@@ -285,13 +285,9 @@ def render_readme_block(svg):
     # the content hash: it only changes when the chart does, and when it
     # changes nothing has cached it yet.
     digest = hashlib.sha256(svg.encode("utf-8")).hexdigest()[:10]
-    # Floated left so hand-written content after the marker block (a project
-    # list, kept outside the markers so this script never overwrites it)
-    # wraps beside the chart instead of stacking under it. No table, so no
-    # border and no zebra striping — GitHub forces both onto every <table>.
     return "\n".join([
         START,
-        f'<img src="{SVG_PATH}?v={digest}" align="left" '
+        f'<img src="{SVG_PATH}?v={digest}" '
         f'alt="Languages ranked by use, most used first" />',
         END,
     ])

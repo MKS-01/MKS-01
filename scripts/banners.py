@@ -28,7 +28,7 @@ FADE_MS = 90
 BANNERS = [
     {
         "file": "banner-top.svg",
-        "text": "☕ coffee → 💻 code → 🔧 tinker → repeat",
+        "text": "🧊☕ coffee → 💻 code → 🔧 tinker → repeat",
         "size": 12,
     },
     {

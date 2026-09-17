@@ -1,6 +1,6 @@
 ### 👽「  M K S  」
 
-<img src="assets/banner-top.svg?v=468fe80792" alt="coffee → code → tinker → repeat" />
+<img src="assets/banner-top.svg?v=0ef4dcc75b" alt="coffee → code → tinker → repeat" />
 
 ```swift
 func main() {
@@ -13,17 +13,5 @@ func main() {
 <img src="assets/banner-hacks.svg?v=08d5f8fba6" alt="old curiosities, new experiments — held together with duct tape and caffeine." />
 
 <!-- langstats:start -->
-<img src="assets/langstats.svg?v=3f3e4be4f8" align="left" alt="Languages ranked by use, most used first" />
+<img src="assets/langstats.svg?v=3f3e4be4f8" alt="Languages ranked by use, most used first" />
 <!-- langstats:end -->
-
-<pre>
-$ ls ~/weekend-hacks
-
-<a href="https://github.com/MKS-01/duskread">duskread</a>
-<a href="https://github.com/MKS-01/readback">readback</a>
-<a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>
-
-$ open <a href="https://mksbrew.dev/#blogs">mksbrew.dev/#blogs</a> for more on these
-</pre>
-
-<br clear="left"/>
