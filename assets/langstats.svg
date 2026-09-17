@@ -35,9 +35,9 @@
       .icon { fill: #116329; }
       .track { fill: #116329; opacity: 0.13; }
       .s0 { fill: #2da44e; }
-      .s1 { fill: #1a7f37; }
-      .s2 { fill: #116329; }
-      .s3 { fill: #044317; }
+      .s1 { fill: #238636; }
+      .s2 { fill: #1a7f37; }
+      .s3 { fill: #116329; }
     }
   </style>
   <text class="prompt" x="1" y="16">$ ls -l ~/languages</text>

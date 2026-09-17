@@ -58,7 +58,9 @@ END = "<!-- langstats:end -->"
 # scheme gets its own selected steps rather than one value reused, and every
 # step clears 3:1 against its surface.
 RAMP_DARK = ["#2ea043", "#3fb950", "#56d364", "#7ee787"]
-RAMP_LIGHT = ["#2da44e", "#1a7f37", "#116329", "#044317"]
+# Capped at a green that still reads as green: going darker by value is the
+# textbook sequential move, but it painted the leading bar near-black.
+RAMP_LIGHT = ["#2da44e", "#238636", "#1a7f37", "#116329"]
 ICON_DARK, ICON_LIGHT = "#56d364", "#116329"
 ACCENT = RAMP_DARK[-1]
 LINE_HEIGHT = 22
