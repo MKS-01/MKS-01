@@ -23,16 +23,16 @@ func main() {
 <pre>
 $ ls -l ~/languages
 
-Kotlin      █████░░░░░░░░░░░░░  29.3%
-JavaScript  ███░░░░░░░░░░░░░░░  19.4%
-Go          ██░░░░░░░░░░░░░░░░  13.4%
+Kotlin      █████░░░░░░░░░░░░░  29.2%
+JavaScript  ███░░░░░░░░░░░░░░░  19.3%
+Go          ██░░░░░░░░░░░░░░░░  13.3%
 TypeScript  ██░░░░░░░░░░░░░░░░  10.4%
-Python      ██░░░░░░░░░░░░░░░░   8.8%
-Shell       █░░░░░░░░░░░░░░░░░   6.9%
+Python      ██░░░░░░░░░░░░░░░░   9.3%
+Shell       █░░░░░░░░░░░░░░░░░   6.8%
 Swift       █░░░░░░░░░░░░░░░░░   6.2%
 C           █░░░░░░░░░░░░░░░░░   5.6%
 
-across 17 repos · 2.7 MB analyzed
+across 18 repos · 2.7 MB analyzed
 </pre>
 <!-- langstats:end -->
 
