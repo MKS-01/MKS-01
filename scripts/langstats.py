@@ -57,25 +57,28 @@ END = "<!-- langstats:end -->"
 # (never by rank, or a language repaints when the daily order shifts). Each
 # scheme gets its own selected steps rather than one value reused, and every
 # step clears 3:1 against its surface.
-RAMP_DARK = ["#2ea043", "#3fb950", "#56d364", "#7ee787"]
-# Capped at a green that still reads as green: going darker by value is the
-# textbook sequential move, but it painted the leading bar near-black.
-RAMP_LIGHT = ["#2da44e", "#238636", "#1a7f37", "#116329"]
-ICON_DARK, ICON_LIGHT = "#56d364", "#116329"
+RAMP_DARK = ["#1f6feb", "#388bfd", "#4493f8", "#58a6ff"]
+# Capped short of navy-black: going darker by value is the textbook
+# sequential move, but running it to the floor painted the leading square
+# almost black instead of blue.
+RAMP_LIGHT = ["#0969da", "#0757ba", "#0a4faf", "#0a3980"]
+ICON_DARK, ICON_LIGHT = "#58a6ff", "#0969da"
 ACCENT = RAMP_DARK[-1]
 LINE_HEIGHT = 22
 FONT_SIZE = 13
 CHAR_W = 7.85          # advance width of the fallback monospace at 13px
-BAR_W = 200
-BAR_H = 9
-BAR_R = 4.5
+CELL = 9               # square size, GitHub's contribution-graph unit
+CELL_GAP = 3
+CELL_R = 2
+CELLS = 14             # squares per row — enough resolution, narrow canvas
 ICON = 14              # icon box, drawn from a 24x24 viewBox
 ICON_GAP = 8
 
 # One reveal, played once, on a surface a visitor sees for the first time.
-# Bars grow from their left edge over a static track.
-BAR_ANIM_MS = 420
+# Squares light up left to right over a dim, static grid.
+CELL_ANIM_MS = 260
 ROW_STAGGER_MS = 55
+CELL_STAGGER_MS = 10
 SHOW_PERCENT = False   # the score is a blend, not a real share of code
 SHOW_FOOTER = False    # keep the chart generic, without repo or byte counts
 
@@ -169,45 +172,43 @@ def render_svg(ranked, scanned, total_bytes):
     icons = load_icons()
     name_w = max(len(name) for name, _ in ranked)
     name_x = ICON + ICON_GAP
-    meter_x = name_x + round(name_w * CHAR_W) + 16
-    width = meter_x + BAR_W + (62 if SHOW_PERCENT else 8)
+    grid_x = name_x + round(name_w * CHAR_W) + 16
+    grid_w = round(CELLS * (CELL + CELL_GAP) - CELL_GAP)
+    width = grid_x + grid_w + 4
     top = LINE_HEIGHT * 2
     # Rows are baselines, so the last one sits at top + (n-1) * LINE_HEIGHT;
     # reserving a full row after it left a block of dead space below.
     height = top + LINE_HEIGHT * (len(ranked) - 1) + 8
-    if SHOW_FOOTER:
-        height += LINE_HEIGHT + 6
-    mb = total_bytes / 1_000_000
 
-    # Segments are scaled against the leading language rather than a full
-    # 100% track: at true scale the top language fills under a third of the
+    # Squares are scaled against the leading language rather than a full
+    # 100% grid: at true scale the top language fills under a third of the
     # row and the tail is invisible. Ratios between languages are preserved.
     top_pct = max(pct for _, pct in ranked)
+    summary = ", ".join(name for name, _ in ranked)
 
-    if SHOW_PERCENT:
-        summary = ", ".join(f"{name} {pct:.1f} percent" for name, pct in ranked)
-    else:
-        summary = ", ".join(name for name, _ in ranked)
-
-    footer = ""
-    if SHOW_FOOTER:
-        footer = (
-            f'\n  <text class="prompt" x="1" y="{height - 8}">'
-            f'across {scanned} repos \u00b7 {mb:.1f} MB analyzed</text>'
-        )
     rows = []
     for i, (name, pct) in enumerate(ranked):
         y = top + i * LINE_HEIGHT
         ratio = pct / top_pct
-        fill_w = max(BAR_R * 2, BAR_W * ratio)
-        # Four buckets of the ramp, by value.
+        lit = max(1, round(CELLS * ratio))
+        # Four buckets of the ramp, by value — never by rank.
         shade = 3 if ratio >= 0.75 else 2 if ratio >= 0.5 else 1 if ratio >= 0.25 else 0
-        bar_y = y - BAR_H + 1
-        cells = (
-            f'<rect class="track" x="{meter_x}" y="{bar_y}" '
-            f'width="{BAR_W}" height="{BAR_H}" rx="{BAR_R}" />'
-            f'<rect class="bar s{shade}" style="animation-delay:{i * ROW_STAGGER_MS}ms" '
-            f'x="{meter_x}" y="{bar_y}" width="{fill_w:.1f}" height="{BAR_H}" rx="{BAR_R}" />'
+        sq_y = y - CELL
+
+        def square(k, cls, delay=None):
+            style = f' style="animation-delay:{delay}ms"' if delay is not None else ""
+            return (
+                f'<rect class="{cls}"{style} '
+                f'x="{grid_x + k * (CELL + CELL_GAP)}" y="{sq_y}" '
+                f'width="{CELL}" height="{CELL}" rx="{CELL_R}" />'
+            )
+
+        # Full grid first, lit squares over it, so a row reads as filling up
+        # rather than as missing squares while the reveal runs.
+        squares = "".join(square(k, "off") for k in range(CELLS))
+        squares += "".join(
+            square(k, f"on s{shade}", i * ROW_STAGGER_MS + k * CELL_STAGGER_MS)
+            for k in range(lit)
         )
 
         glyph = ""
@@ -221,13 +222,10 @@ def render_svg(ranked, scanned, total_bytes):
                 f'<g transform="translate(0,{y - ICON + 2}) scale({scale:.4f})">'
                 f'{shapes}</g>'
             )
-        row = (
+        rows.append(
             f'  {glyph}<text class="name" x="{name_x}" y="{y}">{esc(name)}</text>\n'
-            f'  {cells}'
+            f'  {squares}'
         )
-        if SHOW_PERCENT:
-            row += f'\n  <text class="pct" x="{width - 8}" y="{y}">{pct:.1f}%</text>'
-        rows.append(row)
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
      viewBox="0 0 {width} {height}" role="img" aria-label="Languages by use, most used first: {esc(summary)}">
@@ -237,34 +235,33 @@ def render_svg(ranked, scanned, total_bytes):
       font-size: {FONT_SIZE}px;
     }}
     .name, .prompt {{ fill: #8b949e; }}
-    .pct {{ fill: #8b949e; text-anchor: end; }}
     .icon {{ fill: {ICON_DARK}; }}
-    .track {{ fill: {ICON_DARK}; opacity: 0.15; }}
+    .off {{ fill: {ICON_DARK}; opacity: 0.15; }}
     .s0 {{ fill: {RAMP_DARK[0]}; }}
     .s1 {{ fill: {RAMP_DARK[1]}; }}
     .s2 {{ fill: {RAMP_DARK[2]}; }}
     .s3 {{ fill: {RAMP_DARK[3]}; }}
-    /* Opacity only, from a visible floor. A transform-based reveal held the
-       bars at zero width through their stagger delay, so any context that
-       shows a static first frame rendered an empty chart. */
-    .bar {{
-      animation: grow {BAR_ANIM_MS}ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    /* Opacity only, from a visible floor. A geometry-based reveal holds a
+       square at zero size through its stagger delay, so any context that
+       shows a static first frame would draw an empty grid. */
+    .on {{
+      animation: lightup {CELL_ANIM_MS}ms cubic-bezier(0.23, 1, 0.32, 1) both;
     }}
-    @keyframes grow {{
+    @keyframes lightup {{
       from {{ opacity: 0.35; }}
       to   {{ opacity: 1; }}
     }}
     @media (prefers-reduced-motion: reduce) {{
-      .bar {{
+      .on {{
         animation: fadein 200ms ease-out both;
         animation-delay: 0ms !important;
       }}
       @keyframes fadein {{ from {{ opacity: 0.35; }} to {{ opacity: 1; }} }}
     }}
     @media (prefers-color-scheme: light) {{
-      .name, .pct, .prompt {{ fill: #57606a; }}
+      .name, .prompt {{ fill: #57606a; }}
       .icon {{ fill: {ICON_LIGHT}; }}
-      .track {{ fill: {ICON_LIGHT}; opacity: 0.13; }}
+      .off {{ fill: {ICON_LIGHT}; opacity: 0.13; }}
       .s0 {{ fill: {RAMP_LIGHT[0]}; }}
       .s1 {{ fill: {RAMP_LIGHT[1]}; }}
       .s2 {{ fill: {RAMP_LIGHT[2]}; }}
@@ -272,7 +269,7 @@ def render_svg(ranked, scanned, total_bytes):
     }}
   </style>
   <text class="prompt" x="1" y="{LINE_HEIGHT - 6}">$ ls -l ~/languages</text>
-{chr(10).join(rows)}{footer}
+{chr(10).join(rows)}
 </svg>
 """
 
@@ -283,9 +280,14 @@ def render_readme_block(svg):
     # the content hash: it only changes when the chart does, and when it
     # changes nothing has cached it yet.
     digest = hashlib.sha256(svg.encode("utf-8")).hexdigest()[:10]
+    # Floated left so hand-written content after the marker block (a project
+    # list, kept outside the markers so this script never overwrites it)
+    # wraps beside the chart instead of stacking under it. No table, so no
+    # border and no zebra striping — GitHub forces both onto every <table>.
     return "\n".join([
         START,
-        f'<img src="{SVG_PATH}?v={digest}" alt="Languages ranked by use, most used first" />',
+        f'<img src="{SVG_PATH}?v={digest}" align="left" '
+        f'alt="Languages ranked by use, most used first" />',
         END,
     ])
 
