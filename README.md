@@ -19,6 +19,23 @@ func main() {
 
 <img height="20" src="https://cdn.simpleicons.org/typescript/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/go/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/cplusplus/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/python/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/swift/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/kotlin/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/javascript/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/gnubash/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/openjdk/58a6ff" />
 
+<!-- langstats:start -->
+<pre>
+$ ls -l ~/languages
+
+Kotlin      █████░░░░░░░░░░░░░  29.3%
+JavaScript  ███░░░░░░░░░░░░░░░  19.4%
+Go          ██░░░░░░░░░░░░░░░░  13.4%
+TypeScript  ██░░░░░░░░░░░░░░░░  10.4%
+Python      ██░░░░░░░░░░░░░░░░   8.8%
+Shell       █░░░░░░░░░░░░░░░░░   6.9%
+Swift       █░░░░░░░░░░░░░░░░░   6.2%
+C           █░░░░░░░░░░░░░░░░░   5.6%
+
+across 17 repos · 2.7 MB analyzed
+</pre>
+<!-- langstats:end -->
+
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=4000&pause=100000&color=58a6ff&vCenter=true&multiline=false&width=950&height=24&lines=old+curiosities%2C+new+experiments+%E2%80%94+held+together+with+duct+tape+and+caffeine." />
 
 <pre>
