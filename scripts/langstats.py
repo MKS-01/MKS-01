@@ -43,8 +43,10 @@ EXCLUDE = {
 
 SVG_PATH = os.environ.get("LANGSTATS_SVG", "assets/langstats.svg")
 
-# Icon outlines vendored from Simple Icons (CC0) so nothing is fetched at
-# build or render time. A language with no icon simply renders its name.
+# Icon outlines vendored from Simple Icons (CC0) and devicon (MIT) so
+# nothing is fetched at build or render time. Each entry carries its own
+# viewBox, since the two sets use different grids. A language with no icon
+# simply renders its name.
 ICONS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icons.json")
 START = "<!-- langstats:start -->"
 END = "<!-- langstats:end -->"
@@ -164,9 +166,11 @@ def render_svg(ranked, scanned, total_bytes):
     meter_w = round(CELLS * (CELL_W + CELL_GAP) - CELL_GAP)
     width = meter_x + meter_w + (62 if SHOW_PERCENT else 8)
     top = LINE_HEIGHT * 2
-    height = top + LINE_HEIGHT * len(ranked) + 8
+    # Rows are baselines, so the last one sits at top + (n-1) * LINE_HEIGHT;
+    # reserving a full row after it left a block of dead space below.
+    height = top + LINE_HEIGHT * (len(ranked) - 1) + 8
     if SHOW_FOOTER:
-        height += LINE_HEIGHT
+        height += LINE_HEIGHT + 6
     mb = total_bytes / 1_000_000
 
     # Segments are scaled against the leading language rather than a full
@@ -207,10 +211,14 @@ def render_svg(ranked, scanned, total_bytes):
         )
         glyph = ""
         if name in icons:
-            scale = ICON / 24
+            spec = icons[name]
+            grid = float(spec.get("viewBox", "0 0 24 24").split()[2])
+            scale = ICON / grid
+            paths = spec.get("paths") or [spec["d"]]
+            shapes = "".join(f'<path class="icon" d="{d}" />' for d in paths)
             glyph = (
                 f'<g transform="translate(0,{y - ICON + 2}) scale({scale:.4f})">'
-                f'<path class="icon" d="{icons[name]["d"]}" /></g>'
+                f'{shapes}</g>'
             )
         row = (
             f'  {glyph}<text class="name" x="{name_x}" y="{y}">{esc(name)}</text>\n'
