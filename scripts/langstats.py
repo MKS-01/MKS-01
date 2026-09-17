@@ -25,24 +25,9 @@ INCLUDE_FORKS = False
 SIZE_WEIGHT = 0.85
 COUNT_WEIGHT = 0.15
 
-# Only things MKS actually built: no boilerplate, demo UIs, practice
-# backends or link collections. Add new projects here as they land, since
-# nothing is picked up automatically. Matched case-insensitively.
-PROJECTS = {
-    "duskread",
-    "lokalgrid",
-    "mac-mlx-cluster",
-    "readback",
-    "pizow",
-    "mobile-recon",
-    "log-analyzer",
-    "graphql-newsapi",
-    "react-native-ecommerce",
-    "raspberry-pi-robot",
-    "2wd-h-t-robot",
-    "arduino-robot",
-    "ios-location-tracking",
-}
+# This repo only holds the generator, so counting it would let the chart
+# measure itself. Names are matched case-insensitively.
+EXCLUDE_REPOS = {"mks-01"}
 
 # Build-system and markup noise that says nothing about what MKS writes.
 EXCLUDE = {
@@ -95,7 +80,7 @@ def collect():
                 continue
             if repo.get("archived") or repo.get("private"):
                 continue
-            if repo["name"].lower() not in PROJECTS:
+            if repo["name"].lower() in EXCLUDE_REPOS:
                 continue
             langs = api(f"/repos/{USER}/{repo['name']}/languages")
             langs = {k: v for k, v in langs.items() if k not in EXCLUDE}
