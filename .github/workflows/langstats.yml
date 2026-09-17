@@ -21,7 +21,12 @@ jobs:
 
       - name: Rebuild language block and push
         env:
+          # Built-in token: public repos only, expires with the run.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional PAT that can also see private repos. Referenced from the
+          # secret store, never written into the repo, and masked in logs.
+          # Absent secret resolves to empty and the run stays public-only.
+          LANGSTATS_TOKEN: ${{ secrets.LANGSTATS_TOKEN }}
           BRANCH: ${{ github.ref_name }}
         run: |
           git config user.name "github-actions[bot]"

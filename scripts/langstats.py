@@ -17,7 +17,12 @@ README = os.environ.get("LANGSTATS_README", "README.md")
 
 TOP_N = 10         # languages to list
 BAR_WIDTH = 18     # characters in the bar
-INCLUDE_FORKS = False
+# Private repos are counted when a token that can see them is supplied via
+# LANGSTATS_TOKEN. Only the language totals are used: no repo name, count,
+# description or byte figure from a private repo reaches the chart or the
+# logs. Note the aggregate is still a disclosure — a language that exists
+# only in a private repo becomes visible by appearing at all.
+INCLUDE_PRIVATE = True
 
 # A 92 MB JavaScript repo shouldn't drown out six Kotlin ones, so blend raw
 # byte share with how many repos the language shows up in (both weights
@@ -50,6 +55,7 @@ CELL_W = 7
 CELL_GAP = 2.6
 CELL_H = 9
 SHOW_PERCENT = False   # the score is a blend, not a real share of code
+SHOW_FOOTER = False    # keep the chart generic, without repo or byte counts
 
 
 def api(path):
@@ -60,11 +66,26 @@ def api(path):
             "User-Agent": "langstats",
         },
     )
-    token = os.environ.get("GITHUB_TOKEN")
+    token = os.environ.get("LANGSTATS_TOKEN") or os.environ.get("GITHUB_TOKEN")
     if token:
         req.add_header("Authorization", f"Bearer {token}")
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.load(resp)
+
+
+def repo_page(page):
+    """One page of owned repos, including private ones when the token allows."""
+    if INCLUDE_PRIVATE and os.environ.get("LANGSTATS_TOKEN"):
+        try:
+            return api(
+                "/user/repos?per_page=100&affiliation=owner"
+                f"&visibility=all&page={page}"
+            )
+        except urllib.error.HTTPError as exc:
+            if exc.code not in (401, 403):
+                raise
+            print("token cannot list private repos, using public only", file=sys.stderr)
+    return api(f"/users/{USER}/repos?per_page=100&type=owner&page={page}")
 
 
 def collect():
@@ -72,17 +93,19 @@ def collect():
     totals, counts, scanned = {}, {}, 0
     page = 1
     while True:
-        repos = api(f"/users/{USER}/repos?per_page=100&type=owner&page={page}")
+        repos = repo_page(page)
         if not repos:
             break
         for repo in repos:
-            if repo["fork"] and not INCLUDE_FORKS:
+            if repo["fork"]:          # someone else's code
                 continue
-            if repo.get("archived") or repo.get("private"):
+            if repo.get("archived"):
+                continue
+            if repo.get("private") and not INCLUDE_PRIVATE:
                 continue
             if repo["name"].lower() in EXCLUDE_REPOS:
                 continue
-            langs = api(f"/repos/{USER}/{repo['name']}/languages")
+            langs = api(f"/repos/{repo['full_name']}/languages")
             langs = {k: v for k, v in langs.items() if k not in EXCLUDE}
             if not langs:
                 continue
@@ -118,7 +141,9 @@ def render_svg(ranked, scanned, total_bytes):
     meter_w = round(CELLS * (CELL_W + CELL_GAP) - CELL_GAP)
     width = meter_x + meter_w + (62 if SHOW_PERCENT else 8)
     top = LINE_HEIGHT * 2
-    height = top + LINE_HEIGHT * len(ranked) + LINE_HEIGHT + 8
+    height = top + LINE_HEIGHT * len(ranked) + 8
+    if SHOW_FOOTER:
+        height += LINE_HEIGHT
     mb = total_bytes / 1_000_000
 
     # Segments are scaled against the leading language rather than a full
@@ -130,6 +155,13 @@ def render_svg(ranked, scanned, total_bytes):
         summary = ", ".join(f"{name} {pct:.1f} percent" for name, pct in ranked)
     else:
         summary = ", ".join(name for name, _ in ranked)
+
+    footer = ""
+    if SHOW_FOOTER:
+        footer = (
+            f'\n  <text class="prompt" x="1" y="{height - 8}">'
+            f'across {scanned} repos \u00b7 {mb:.1f} MB analyzed</text>'
+        )
     rows = []
     for i, (name, pct) in enumerate(ranked):
         y = top + i * LINE_HEIGHT
@@ -165,8 +197,7 @@ def render_svg(ranked, scanned, total_bytes):
     }}
   </style>
   <text class="prompt" x="1" y="{LINE_HEIGHT - 6}">$ ls -l ~/languages</text>
-{chr(10).join(rows)}
-  <text class="prompt" x="1" y="{height - 8}">across {scanned} repos \u00b7 {mb:.1f} MB analyzed</text>
+{chr(10).join(rows)}{footer}
 </svg>
 """
 
