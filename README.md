@@ -1,8 +1,6 @@
 ### 👽「  M K S  」
 
-<a href="#">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=12&duration=2500&pause=100000&color=58a6ff&vCenter=true&multiline=false&width=380&height=20&lines=%E2%98%95+coffee+%E2%86%92+%F0%9F%92%BB+code+%E2%86%92+%F0%9F%94%A7+tinker+%E2%86%92+repeat" />
-</a>
+<img src="assets/banner-top.svg?v=bbc825b42d" alt="coffee → code → tinker → repeat" />
 
 ```swift
 func main() {
@@ -21,20 +19,15 @@ func main() {
 <img src="assets/langstats.svg?v=2a9d181536" alt="Languages ranked by use, most used first" />
 <!-- langstats:end -->
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=4000&pause=100000&color=58a6ff&vCenter=true&multiline=false&width=950&height=24&lines=old+curiosities%2C+new+experiments+%E2%80%94+held+together+with+duct+tape+and+caffeine." />
+<img src="assets/banner-hacks.svg?v=522808c7cc" alt="old curiosities, new experiments — held together with duct tape and caffeine." />
 
 <pre>
 $ ls ~/weekend-hacks
 
-<a href="https://github.com/MKS-01/duskread">duskread</a>
-    a reading habit, automated around a Notion database — KMP app.
-<a href="https://github.com/MKS-01/readback">readback</a>
-    paste a URL, get an audiobook — read aloud, on-device.
-<a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>
-    a spare Mac reborn as a GPU — LLM serving via MLX.
-<a href="https://github.com/MKS-01/lokalgrid">lokalgrid</a>
-    off-grid group chat and live map — one LoRa board.
+<a href="https://github.com/MKS-01/duskread">duskread</a>          a reading habit, automated — KMP
+<a href="https://github.com/MKS-01/readback">readback</a>          paste a URL, get an audiobook
+<a href="https://github.com/MKS-01/mac-mlx-cluster">mac-mlx-cluster</a>   a spare Mac reborn as a GPU
+<a href="https://github.com/MKS-01/lokalgrid">lokalgrid</a>         off-grid chat and map, one board
 
-$ open <a href="https://mksbrew.dev/#blogs">mksbrew.dev/#blogs</a>
-    read more about these weekend hacks here.
+$ open <a href="https://mksbrew.dev/#blogs">mksbrew.dev/#blogs</a> more on these
 </pre>
