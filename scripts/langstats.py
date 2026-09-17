@@ -45,8 +45,10 @@ ACCENT = "#58a6ff"
 LINE_HEIGHT = 22
 FONT_SIZE = 13
 CHAR_W = 7.85          # advance width of the fallback monospace at 13px
-BAR_W = 200
-BAR_H = 9
+CELLS = 22             # segments in each meter
+CELL_W = 7
+CELL_GAP = 2.6
+CELL_H = 9
 
 
 def api(path):
@@ -111,23 +113,32 @@ def esc(text):
 
 def render_svg(ranked, scanned, total_bytes):
     name_w = max(len(name) for name, _ in ranked)
-    bar_x = round(name_w * CHAR_W) + 16
-    width = bar_x + BAR_W + 68   # room for "100.0%" plus right padding
+    meter_x = round(name_w * CHAR_W) + 16
+    meter_w = round(CELLS * (CELL_W + CELL_GAP) - CELL_GAP)
+    width = meter_x + meter_w + 62
     top = LINE_HEIGHT * 2
     height = top + LINE_HEIGHT * len(ranked) + LINE_HEIGHT + 8
     mb = total_bytes / 1_000_000
+
+    # Segments are scaled against the leading language rather than a full
+    # 100% track: at true scale the top language fills under a third of the
+    # row and the tail is invisible. Ratios between languages are preserved.
+    top_pct = max(pct for _, pct in ranked)
 
     summary = ", ".join(f"{name} {pct:.1f} percent" for name, pct in ranked)
     rows = []
     for i, (name, pct) in enumerate(ranked):
         y = top + i * LINE_HEIGHT
-        fill = round(BAR_W * pct / 100)
+        lit = max(1, round(CELLS * pct / top_pct))
+        cells = "".join(
+            f'<rect class="{"on" if k < lit else "off"}" '
+            f'x="{meter_x + k * (CELL_W + CELL_GAP):.1f}" y="{y - CELL_H + 1}" '
+            f'width="{CELL_W}" height="{CELL_H}" rx="1" />'
+            for k in range(CELLS)
+        )
         rows.append(
             f'  <text class="name" x="1" y="{y}">{esc(name)}</text>\n'
-            f'  <rect class="track" x="{bar_x}" y="{y - BAR_H + 1}" '
-            f'width="{BAR_W}" height="{BAR_H}" rx="2" />\n'
-            f'  <rect class="bar" x="{bar_x}" y="{y - BAR_H + 1}" '
-            f'width="{fill}" height="{BAR_H}" rx="2" />\n'
+            f'  {cells}\n'
             f'  <text class="pct" x="{width - 8}" y="{y}">{pct:.1f}%</text>'
         )
 
@@ -140,11 +151,11 @@ def render_svg(ranked, scanned, total_bytes):
     }}
     .name, .prompt {{ fill: #8b949e; }}
     .pct {{ fill: #8b949e; text-anchor: end; }}
-    .bar {{ fill: {ACCENT}; }}
-    .track {{ fill: #8b949e; opacity: 0.18; }}
+    .on {{ fill: {ACCENT}; }}
+    .off {{ fill: {ACCENT}; opacity: 0.20; }}
     @media (prefers-color-scheme: light) {{
       .name, .pct, .prompt {{ fill: #57606a; }}
-      .track {{ fill: #57606a; opacity: 0.15; }}
+      .off {{ opacity: 0.22; }}
     }}
   </style>
   <text class="prompt" x="1" y="{LINE_HEIGHT - 6}">$ ls -l ~/languages</text>
