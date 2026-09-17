@@ -41,6 +41,10 @@ EXCLUDE = {
 }
 
 SVG_PATH = os.environ.get("LANGSTATS_SVG", "assets/langstats.svg")
+
+# Icon outlines vendored from Simple Icons (CC0) so nothing is fetched at
+# build or render time. A language with no icon simply renders its name.
+ICONS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icons.json")
 START = "<!-- langstats:start -->"
 END = "<!-- langstats:end -->"
 
@@ -54,6 +58,8 @@ CELLS = 22             # segments in each meter
 CELL_W = 7
 CELL_GAP = 2.6
 CELL_H = 9
+ICON = 14              # icon box, drawn from a 24x24 viewBox
+ICON_GAP = 8
 SHOW_PERCENT = False   # the score is a blend, not a real share of code
 SHOW_FOOTER = False    # keep the chart generic, without repo or byte counts
 
@@ -131,13 +137,23 @@ def rank(totals, counts):
     return [(name, 100 * score / shown) for name, score in top]
 
 
+def load_icons():
+    try:
+        with open(ICONS_PATH, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return {}
+
+
 def esc(text):
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def render_svg(ranked, scanned, total_bytes):
+    icons = load_icons()
     name_w = max(len(name) for name, _ in ranked)
-    meter_x = round(name_w * CHAR_W) + 16
+    name_x = ICON + ICON_GAP
+    meter_x = name_x + round(name_w * CHAR_W) + 16
     meter_w = round(CELLS * (CELL_W + CELL_GAP) - CELL_GAP)
     width = meter_x + meter_w + (62 if SHOW_PERCENT else 8)
     top = LINE_HEIGHT * 2
@@ -172,8 +188,15 @@ def render_svg(ranked, scanned, total_bytes):
             f'width="{CELL_W}" height="{CELL_H}" rx="1" />'
             for k in range(CELLS)
         )
+        glyph = ""
+        if name in icons:
+            scale = ICON / 24
+            glyph = (
+                f'<g transform="translate(0,{y - ICON + 2}) scale({scale:.4f})">'
+                f'<path class="icon" d="{icons[name]["d"]}" /></g>'
+            )
         row = (
-            f'  <text class="name" x="1" y="{y}">{esc(name)}</text>\n'
+            f'  {glyph}<text class="name" x="{name_x}" y="{y}">{esc(name)}</text>\n'
             f'  {cells}'
         )
         if SHOW_PERCENT:
@@ -189,6 +212,7 @@ def render_svg(ranked, scanned, total_bytes):
     }}
     .name, .prompt {{ fill: #8b949e; }}
     .pct {{ fill: #8b949e; text-anchor: end; }}
+    .icon {{ fill: {ACCENT}; }}
     .on {{ fill: {ACCENT}; }}
     .off {{ fill: {ACCENT}; opacity: 0.20; }}
     @media (prefers-color-scheme: light) {{
@@ -205,7 +229,7 @@ def render_svg(ranked, scanned, total_bytes):
 def render_readme_block():
     return "\n".join([
         START,
-        f'<img src="{SVG_PATH}" alt="Language usage by share of code across public repos" />',
+        f'<img src="{SVG_PATH}" alt="Languages ranked by use, most used first" />',
         END,
     ])
 
