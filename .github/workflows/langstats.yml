@@ -19,19 +19,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Rebuild language block
+      - name: Rebuild language block and push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python3 scripts/langstats.py
-
-      - name: Commit if changed
+          BRANCH: ${{ github.ref_name }}
         run: |
-          if [ -z "$(git status --porcelain README.md)" ]; then
-            echo "README unchanged"
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update language stats"
-          git push
+
+          # README.md is generated output, so always rebuild it on top of the
+          # latest branch tip. A concurrent edit then costs a retry instead of
+          # a merge conflict.
+          for attempt in 1 2 3; do
+            git fetch origin "$BRANCH"
+            git reset --hard "origin/$BRANCH"
+
+            python3 scripts/langstats.py
+
+            if [ -z "$(git status --porcelain README.md)" ]; then
+              echo "README unchanged"
+              exit 0
+            fi
+
+            git add README.md
+            git commit -m "Update language stats"
+
+            if git push origin "HEAD:$BRANCH"; then
+              echo "pushed on attempt $attempt"
+              exit 0
+            fi
+
+            echo "push raced with another commit, retrying"
+            sleep 5
+          done
+
+          echo "could not push after 3 attempts"
+          exit 1
