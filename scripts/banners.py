@@ -74,10 +74,16 @@ def render(text, size):
     @media (prefers-color-scheme: light) {{
       text {{ fill: {ACCENT_LIGHT}; }}
     }}
-    tspan {{ animation: appear {FADE_MS}ms ease-out both; }}
+    /* forwards, not both: "both" applies the from-keyframe (opacity 0)
+       during the pre-play delay, so a renderer that parses the animation
+       but never ticks its timeline — some static SVG rasterizers, some
+       markdown clients — shows every character invisible. "forwards"
+       leaves the delay period on the element's own resting style, which
+       is full opacity by default, so those renderers fall back correct. */
+    tspan {{ opacity: 1; animation: appear {FADE_MS}ms ease-out forwards; }}
     @keyframes appear {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
     @media (prefers-reduced-motion: reduce) {{
-      tspan {{ animation: appear 200ms ease-out both; animation-delay: 0ms !important; }}
+      tspan {{ animation: appear 200ms ease-out forwards; animation-delay: 0ms !important; }}
     }}
   </style>
   <text x="1" y="{baseline}" xml:space="preserve">{spans}</text>

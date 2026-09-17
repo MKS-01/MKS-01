@@ -5,10 +5,16 @@
     @media (prefers-color-scheme: light) {
       text { fill: #0969da; }
     }
-    tspan { animation: appear 90ms ease-out both; }
+    /* forwards, not both: "both" applies the from-keyframe (opacity 0)
+       during the pre-play delay, so a renderer that parses the animation
+       but never ticks its timeline — some static SVG rasterizers, some
+       markdown clients — shows every character invisible. "forwards"
+       leaves the delay period on the element's own resting style, which
+       is full opacity by default, so those renderers fall back correct. */
+    tspan { opacity: 1; animation: appear 90ms ease-out forwards; }
     @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
     @media (prefers-reduced-motion: reduce) {
-      tspan { animation: appear 200ms ease-out both; animation-delay: 0ms !important; }
+      tspan { animation: appear 200ms ease-out forwards; animation-delay: 0ms !important; }
     }
   </style>
   <text x="1" y="14" xml:space="preserve"><tspan style="animation-delay:0ms">☕</tspan><tspan> </tspan><tspan style="animation-delay:110ms">c</tspan><tspan style="animation-delay:165ms">o</tspan><tspan style="animation-delay:220ms">f</tspan><tspan style="animation-delay:275ms">f</tspan><tspan style="animation-delay:330ms">e</tspan><tspan style="animation-delay:385ms">e</tspan><tspan> </tspan><tspan style="animation-delay:495ms">→</tspan><tspan> </tspan><tspan style="animation-delay:605ms">💻</tspan><tspan> </tspan><tspan style="animation-delay:715ms">c</tspan><tspan style="animation-delay:770ms">o</tspan><tspan style="animation-delay:825ms">d</tspan><tspan style="animation-delay:880ms">e</tspan><tspan> </tspan><tspan style="animation-delay:990ms">→</tspan><tspan> </tspan><tspan style="animation-delay:1100ms">🔧</tspan><tspan> </tspan><tspan style="animation-delay:1210ms">t</tspan><tspan style="animation-delay:1265ms">i</tspan><tspan style="animation-delay:1320ms">n</tspan><tspan style="animation-delay:1375ms">k</tspan><tspan style="animation-delay:1430ms">e</tspan><tspan style="animation-delay:1485ms">r</tspan><tspan> </tspan><tspan style="animation-delay:1595ms">→</tspan><tspan> </tspan><tspan style="animation-delay:1705ms">r</tspan><tspan style="animation-delay:1760ms">e</tspan><tspan style="animation-delay:1815ms">p</tspan><tspan style="animation-delay:1870ms">e</tspan><tspan style="animation-delay:1925ms">a</tspan><tspan style="animation-delay:1980ms">t</tspan></text>

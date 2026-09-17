@@ -241,11 +241,16 @@ def render_svg(ranked, scanned, total_bytes):
     .s1 {{ fill: {RAMP_DARK[1]}; }}
     .s2 {{ fill: {RAMP_DARK[2]}; }}
     .s3 {{ fill: {RAMP_DARK[3]}; }}
-    /* Opacity only, from a visible floor. A geometry-based reveal holds a
-       square at zero size through its stagger delay, so any context that
-       shows a static first frame would draw an empty grid. */
+    /* forwards, not both, and a full-opacity resting style: "both" applies
+       the from-keyframe during the pre-play delay, so a renderer that
+       parses the animation but never ticks its timeline — some static SVG
+       rasterizers, some markdown clients — would show every lit square
+       stuck dim. "forwards" leaves the delay period on the square's own
+       resting style (opacity 1 below), so those renderers fall back to
+       the correct full color instead of a washed-out one. */
     .on {{
-      animation: lightup {CELL_ANIM_MS}ms cubic-bezier(0.23, 1, 0.32, 1) both;
+      opacity: 1;
+      animation: lightup {CELL_ANIM_MS}ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
     }}
     @keyframes lightup {{
       from {{ opacity: 0.35; }}
@@ -253,7 +258,7 @@ def render_svg(ranked, scanned, total_bytes):
     }}
     @media (prefers-reduced-motion: reduce) {{
       .on {{
-        animation: fadein 200ms ease-out both;
+        animation: fadein 200ms ease-out forwards;
         animation-delay: 0ms !important;
       }}
       @keyframes fadein {{ from {{ opacity: 0.35; }} to {{ opacity: 1; }} }}
