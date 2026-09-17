@@ -31,9 +31,18 @@ EXCLUDE = {
     "Starlark", "Roff", "TeX", "Vim Script", "PowerShell", "Ruby",
 }
 
-FILLED, EMPTY = "█", "░"
+SVG_PATH = os.environ.get("LANGSTATS_SVG", "assets/langstats.svg")
 START = "<!-- langstats:start -->"
 END = "<!-- langstats:end -->"
+
+# GitHub strips inline CSS from README HTML, so the chart ships as an SVG in
+# this repo. Colors follow the README's own palette.
+ACCENT = "#58a6ff"
+LINE_HEIGHT = 22
+FONT_SIZE = 13
+CHAR_W = 7.85          # advance width of the fallback monospace at 13px
+BAR_W = 200
+BAR_H = 9
 
 
 def api(path):
@@ -90,21 +99,61 @@ def rank(totals, counts):
     return [(name, 100 * score / shown) for name, score in top]
 
 
-def render(ranked, scanned, total_bytes):
-    width = max(len(name) for name, _ in ranked)
-    lines = [START, "<pre>", "$ ls -l ~/languages", ""]
-    for name, pct in ranked:
-        filled = round(pct / 100 * BAR_WIDTH)
-        bar = FILLED * filled + EMPTY * (BAR_WIDTH - filled)
-        lines.append(f"{name.ljust(width)}  {bar}  {pct:4.1f}%")
+def esc(text):
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def render_svg(ranked, scanned, total_bytes):
+    name_w = max(len(name) for name, _ in ranked)
+    bar_x = round(name_w * CHAR_W) + 16
+    width = bar_x + BAR_W + 68   # room for "100.0%" plus right padding
+    top = LINE_HEIGHT * 2
+    height = top + LINE_HEIGHT * len(ranked) + LINE_HEIGHT + 8
     mb = total_bytes / 1_000_000
-    lines += [
-        "",
-        f"across {scanned} repos · {mb:.1f} MB analyzed",
-        "</pre>",
+
+    summary = ", ".join(f"{name} {pct:.1f} percent" for name, pct in ranked)
+    rows = []
+    for i, (name, pct) in enumerate(ranked):
+        y = top + i * LINE_HEIGHT
+        fill = round(BAR_W * pct / 100)
+        rows.append(
+            f'  <text class="name" x="1" y="{y}">{esc(name)}</text>\n'
+            f'  <rect class="track" x="{bar_x}" y="{y - BAR_H + 1}" '
+            f'width="{BAR_W}" height="{BAR_H}" rx="2" />\n'
+            f'  <rect class="bar" x="{bar_x}" y="{y - BAR_H + 1}" '
+            f'width="{fill}" height="{BAR_H}" rx="2" />\n'
+            f'  <text class="pct" x="{width - 8}" y="{y}">{pct:.1f}%</text>'
+        )
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
+     viewBox="0 0 {width} {height}" role="img" aria-label="Language usage: {esc(summary)}">
+  <style>
+    text {{
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: {FONT_SIZE}px;
+    }}
+    .name, .prompt {{ fill: #8b949e; }}
+    .pct {{ fill: #8b949e; text-anchor: end; }}
+    .bar {{ fill: {ACCENT}; }}
+    .track {{ fill: #8b949e; opacity: 0.18; }}
+    @media (prefers-color-scheme: light) {{
+      .name, .pct, .prompt {{ fill: #57606a; }}
+      .track {{ fill: #57606a; opacity: 0.15; }}
+    }}
+  </style>
+  <text class="prompt" x="1" y="{LINE_HEIGHT - 6}">$ ls -l ~/languages</text>
+{chr(10).join(rows)}
+  <text class="prompt" x="1" y="{height - 8}">across {scanned} repos \u00b7 {mb:.1f} MB analyzed</text>
+</svg>
+"""
+
+
+def render_readme_block():
+    return "\n".join([
+        START,
+        f'<img src="{SVG_PATH}" alt="Language usage by share of code across public repos" />',
         END,
-    ]
-    return "\n".join(lines)
+    ])
 
 
 def main():
@@ -117,7 +166,21 @@ def main():
         print("no language data found", file=sys.stderr)
         return 1
 
-    block = render(rank(totals, counts), scanned, sum(totals.values()))
+    ranked = rank(totals, counts)
+    svg = render_svg(ranked, scanned, sum(totals.values()))
+    changed = False
+
+    os.makedirs(os.path.dirname(SVG_PATH) or ".", exist_ok=True)
+    existing = ""
+    if os.path.exists(SVG_PATH):
+        with open(SVG_PATH, encoding="utf-8") as fh:
+            existing = fh.read()
+    if existing != svg:
+        with open(SVG_PATH, "w", encoding="utf-8") as fh:
+            fh.write(svg)
+        changed = True
+
+    block = render_readme_block()
 
     with open(README, encoding="utf-8") as fh:
         readme = fh.read()
@@ -128,12 +191,12 @@ def main():
         re.escape(START) + r".*?" + re.escape(END), lambda _: block, readme, flags=re.S
     )
 
-    if updated == readme:
-        print("no change")
-        return 0
-    with open(README, "w", encoding="utf-8") as fh:
-        fh.write(updated)
-    print("updated")
+    if updated != readme:
+        with open(README, "w", encoding="utf-8") as fh:
+            fh.write(updated)
+        changed = True
+
+    print("updated" if changed else "no change")
     return 0
 
 

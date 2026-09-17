@@ -20,20 +20,7 @@ func main() {
 <img height="20" src="https://cdn.simpleicons.org/typescript/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/go/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/cplusplus/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/python/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/swift/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/kotlin/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/javascript/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/gnubash/58a6ff" /> <img height="20" src="https://cdn.simpleicons.org/openjdk/58a6ff" />
 
 <!-- langstats:start -->
-<pre>
-$ ls -l ~/languages
-
-Kotlin      █████░░░░░░░░░░░░░  29.2%
-JavaScript  ███░░░░░░░░░░░░░░░  19.3%
-Go          ██░░░░░░░░░░░░░░░░  13.3%
-TypeScript  ██░░░░░░░░░░░░░░░░  10.4%
-Python      ██░░░░░░░░░░░░░░░░   9.3%
-Shell       █░░░░░░░░░░░░░░░░░   6.8%
-Swift       █░░░░░░░░░░░░░░░░░   6.2%
-C           █░░░░░░░░░░░░░░░░░   5.6%
-
-across 18 repos · 2.7 MB analyzed
-</pre>
+<img src="assets/langstats.svg" alt="Language usage by share of code across public repos" />
 <!-- langstats:end -->
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=4000&pause=100000&color=58a6ff&vCenter=true&multiline=false&width=950&height=24&lines=old+curiosities%2C+new+experiments+%E2%80%94+held+together+with+duct+tape+and+caffeine." />

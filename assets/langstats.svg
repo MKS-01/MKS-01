@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="362" height="250"
+     viewBox="0 0 362 250" role="img" aria-label="Language usage: Kotlin 29.2 percent, JavaScript 19.3 percent, Go 13.3 percent, TypeScript 10.4 percent, Python 9.3 percent, Shell 6.8 percent, Swift 6.2 percent, C 5.6 percent">
+  <style>
+    text {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 13px;
+    }
+    .name, .prompt { fill: #8b949e; }
+    .pct { fill: #8b949e; text-anchor: end; }
+    .bar { fill: #58a6ff; }
+    .track { fill: #8b949e; opacity: 0.18; }
+    @media (prefers-color-scheme: light) {
+      .name, .pct, .prompt { fill: #57606a; }
+      .track { fill: #57606a; opacity: 0.15; }
+    }
+  </style>
+  <text class="prompt" x="1" y="16">$ ls -l ~/languages</text>
+  <text class="name" x="1" y="44">Kotlin</text>
+  <rect class="track" x="94" y="36" width="200" height="9" rx="2" />
+  <rect class="bar" x="94" y="36" width="58" height="9" rx="2" />
+  <text class="pct" x="354" y="44">29.2%</text>
+  <text class="name" x="1" y="66">JavaScript</text>
+  <rect class="track" x="94" y="58" width="200" height="9" rx="2" />
+  <rect class="bar" x="94" y="58" width="39" height="9" rx="2" />
+  <text class="pct" x="354" y="66">19.3%</text>
+  <text class="name" x="1" y="88">Go</text>
+  <rect class="track" x="94" y="80" width="200" height="9" rx="2" />
+  <rect class="bar" x="94" y="80" width="27" height="9" rx="2" />
+  <text class="pct" x="354" y="88">13.3%</text>
+  <text class="name" x="1" y="110">TypeScript</text>
+  <rect class="track" x="94" y="102" width="200" height="9" rx="2" />
+  <rect class="bar" x="94" y="102" width="21" height="9" rx="2" />
+  <text class="pct" x="354" y="110">10.4%</text>
+  <text class="name" x="1" y="132">Python</text>
+  <rect class="track" x="94" y="124" width="200" height="9" rx="2" />
+  <rect class="bar" x="94" y="124" width="19" height="9" rx="2" />
+  <text class="pct" x="354" y="132">9.3%</text>
+  <text class="name" x="1" y="154">Shell</text>
+  <rect class="track" x="94" y="146" width="200" height="9" rx="2" />
+  <rect class="bar" x="94" y="146" width="14" height="9" rx="2" />
+  <text class="pct" x="354" y="154">6.8%</text>
+  <text class="name" x="1" y="176">Swift</text>
+  <rect class="track" x="94" y="168" width="200" height="9" rx="2" />
+  <rect class="bar" x="94" y="168" width="12" height="9" rx="2" />
+  <text class="pct" x="354" y="176">6.2%</text>
+  <text class="name" x="1" y="198">C</text>
+  <rect class="track" x="94" y="190" width="200" height="9" rx="2" />
+  <rect class="bar" x="94" y="190" width="11" height="9" rx="2" />
+  <text class="pct" x="354" y="198">5.6%</text>
+  <text class="prompt" x="1" y="242">across 18 repos · 2.7 MB analyzed</text>
+</svg>
