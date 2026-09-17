@@ -49,6 +49,7 @@ CELLS = 22             # segments in each meter
 CELL_W = 7
 CELL_GAP = 2.6
 CELL_H = 9
+SHOW_PERCENT = False   # the score is a blend, not a real share of code
 
 
 def api(path):
@@ -115,7 +116,7 @@ def render_svg(ranked, scanned, total_bytes):
     name_w = max(len(name) for name, _ in ranked)
     meter_x = round(name_w * CHAR_W) + 16
     meter_w = round(CELLS * (CELL_W + CELL_GAP) - CELL_GAP)
-    width = meter_x + meter_w + 62
+    width = meter_x + meter_w + (62 if SHOW_PERCENT else 8)
     top = LINE_HEIGHT * 2
     height = top + LINE_HEIGHT * len(ranked) + LINE_HEIGHT + 8
     mb = total_bytes / 1_000_000
@@ -125,7 +126,10 @@ def render_svg(ranked, scanned, total_bytes):
     # row and the tail is invisible. Ratios between languages are preserved.
     top_pct = max(pct for _, pct in ranked)
 
-    summary = ", ".join(f"{name} {pct:.1f} percent" for name, pct in ranked)
+    if SHOW_PERCENT:
+        summary = ", ".join(f"{name} {pct:.1f} percent" for name, pct in ranked)
+    else:
+        summary = ", ".join(name for name, _ in ranked)
     rows = []
     for i, (name, pct) in enumerate(ranked):
         y = top + i * LINE_HEIGHT
@@ -136,14 +140,16 @@ def render_svg(ranked, scanned, total_bytes):
             f'width="{CELL_W}" height="{CELL_H}" rx="1" />'
             for k in range(CELLS)
         )
-        rows.append(
+        row = (
             f'  <text class="name" x="1" y="{y}">{esc(name)}</text>\n'
-            f'  {cells}\n'
-            f'  <text class="pct" x="{width - 8}" y="{y}">{pct:.1f}%</text>'
+            f'  {cells}'
         )
+        if SHOW_PERCENT:
+            row += f'\n  <text class="pct" x="{width - 8}" y="{y}">{pct:.1f}%</text>'
+        rows.append(row)
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
-     viewBox="0 0 {width} {height}" role="img" aria-label="Language usage: {esc(summary)}">
+     viewBox="0 0 {width} {height}" role="img" aria-label="Languages by use, most used first: {esc(summary)}">
   <style>
     text {{
       font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
