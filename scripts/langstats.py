@@ -57,8 +57,9 @@ END = "<!-- langstats:end -->"
 # (never by rank, or a language repaints when the daily order shifts). Each
 # scheme gets its own selected steps rather than one value reused, and every
 # step clears 3:1 against its surface.
-RAMP_DARK = ["#1a7f37", "#238636", "#2ea043", "#39d353"]
+RAMP_DARK = ["#2ea043", "#3fb950", "#56d364", "#7ee787"]
 RAMP_LIGHT = ["#2da44e", "#1a7f37", "#116329", "#044317"]
+ICON_DARK, ICON_LIGHT = "#56d364", "#116329"
 ACCENT = RAMP_DARK[-1]
 LINE_HEIGHT = 22
 FONT_SIZE = 13
@@ -235,32 +236,33 @@ def render_svg(ranked, scanned, total_bytes):
     }}
     .name, .prompt {{ fill: #8b949e; }}
     .pct {{ fill: #8b949e; text-anchor: end; }}
-    .icon {{ fill: {RAMP_DARK[3]}; }}
-    .track {{ fill: {RAMP_DARK[3]}; opacity: 0.15; }}
+    .icon {{ fill: {ICON_DARK}; }}
+    .track {{ fill: {ICON_DARK}; opacity: 0.15; }}
     .s0 {{ fill: {RAMP_DARK[0]}; }}
     .s1 {{ fill: {RAMP_DARK[1]}; }}
     .s2 {{ fill: {RAMP_DARK[2]}; }}
     .s3 {{ fill: {RAMP_DARK[3]}; }}
+    /* Opacity only, from a visible floor. A transform-based reveal held the
+       bars at zero width through their stagger delay, so any context that
+       shows a static first frame rendered an empty chart. */
     .bar {{
-      transform-box: fill-box;
-      transform-origin: left center;
       animation: grow {BAR_ANIM_MS}ms cubic-bezier(0.23, 1, 0.32, 1) both;
     }}
     @keyframes grow {{
-      from {{ transform: scaleX(0); opacity: 0.5; }}
-      to   {{ transform: scaleX(1); opacity: 1; }}
+      from {{ opacity: 0.35; }}
+      to   {{ opacity: 1; }}
     }}
     @media (prefers-reduced-motion: reduce) {{
       .bar {{
         animation: fadein 200ms ease-out both;
         animation-delay: 0ms !important;
       }}
-      @keyframes fadein {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+      @keyframes fadein {{ from {{ opacity: 0.35; }} to {{ opacity: 1; }} }}
     }}
     @media (prefers-color-scheme: light) {{
       .name, .pct, .prompt {{ fill: #57606a; }}
-      .icon {{ fill: {RAMP_LIGHT[3]}; }}
-      .track {{ fill: {RAMP_LIGHT[3]}; opacity: 0.13; }}
+      .icon {{ fill: {ICON_LIGHT}; }}
+      .track {{ fill: {ICON_LIGHT}; opacity: 0.13; }}
       .s0 {{ fill: {RAMP_LIGHT[0]}; }}
       .s1 {{ fill: {RAMP_LIGHT[1]}; }}
       .s2 {{ fill: {RAMP_LIGHT[2]}; }}

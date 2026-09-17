@@ -10,18 +10,11 @@ func main() {
 
 `m0b1l3` `s3cur1ty` `71nk3r3r` `bu1ld3r`
 
-<img src="assets/banner-hacks.svg?v=1fbdceec50" alt="old curiosities, new experiments — held together with duct tape and caffeine." />
-
-<table>
-<tr>
-<td valign="top">
-
 <!-- langstats:start -->
-<img src="assets/langstats.svg?v=08130f51ea" alt="Languages ranked by use, most used first" />
+<img src="assets/langstats.svg?v=d4293c4579" alt="Languages ranked by use, most used first" />
 <!-- langstats:end -->
 
-</td>
-<td valign="top">
+<img src="assets/banner-hacks.svg?v=1fbdceec50" alt="old curiosities, new experiments — held together with duct tape and caffeine." />
 
 <pre>
 $ ls ~/weekend-hacks
@@ -33,7 +26,3 @@ $ ls ~/weekend-hacks
 
 $ open <a href="https://mksbrew.dev/#blogs">mksbrew.dev/#blogs</a> more on these
 </pre>
-
-</td>
-</tr>
-</table>
