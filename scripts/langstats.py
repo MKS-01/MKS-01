@@ -15,7 +15,7 @@ import urllib.request
 USER = os.environ.get("LANGSTATS_USER", "MKS-01")
 README = os.environ.get("LANGSTATS_README", "README.md")
 
-TOP_N = 8          # languages to list
+TOP_N = 10         # languages to list
 BAR_WIDTH = 18     # characters in the bar
 INCLUDE_FORKS = False
 
@@ -25,9 +25,24 @@ INCLUDE_FORKS = False
 SIZE_WEIGHT = 0.85
 COUNT_WEIGHT = 0.15
 
-# This repo only contains the generator, so counting it would let the chart
-# measure itself. Names are matched case-insensitively.
-EXCLUDE_REPOS = {"mks-01"}
+# Only things MKS actually built: no boilerplate, demo UIs, practice
+# backends or link collections. Add new projects here as they land, since
+# nothing is picked up automatically. Matched case-insensitively.
+PROJECTS = {
+    "duskread",
+    "lokalgrid",
+    "mac-mlx-cluster",
+    "readback",
+    "pizow",
+    "mobile-recon",
+    "log-analyzer",
+    "graphql-newsapi",
+    "react-native-ecommerce",
+    "raspberry-pi-robot",
+    "2wd-h-t-robot",
+    "arduino-robot",
+    "ios-location-tracking",
+}
 
 # Build-system and markup noise that says nothing about what MKS writes.
 EXCLUDE = {
@@ -80,7 +95,7 @@ def collect():
                 continue
             if repo.get("archived") or repo.get("private"):
                 continue
-            if repo["name"].lower() in EXCLUDE_REPOS:
+            if repo["name"].lower() not in PROJECTS:
                 continue
             langs = api(f"/repos/{USER}/{repo['name']}/languages")
             langs = {k: v for k, v in langs.items() if k not in EXCLUDE}
