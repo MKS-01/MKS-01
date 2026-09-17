@@ -1,7 +1,7 @@
 ### 👽「  M K S  」
 
 <a href="#">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=12&duration=2500&pause=800&color=58a6ff&vCenter=true&multiline=false&width=380&height=20&lines=%E2%98%95+coffee+%E2%86%92+%F0%9F%92%BB+code+%E2%86%92+%F0%9F%94%A7+tinker+%E2%86%92+repeat" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=12&duration=2500&pause=100000&color=58a6ff&vCenter=true&multiline=false&width=380&height=20&lines=%E2%98%95+coffee+%E2%86%92+%F0%9F%92%BB+code+%E2%86%92+%F0%9F%94%A7+tinker+%E2%86%92+repeat" />
 </a>
 
 ```swift
@@ -18,7 +18,7 @@ func main() {
 `m0b1l3` `s3cur1ty` `71nk3r3r` `bu1ld3r`
 
 <!-- langstats:start -->
-<img src="assets/langstats.svg?v=1376f692d6" alt="Languages ranked by use, most used first" />
+<img src="assets/langstats.svg?v=2a9d181536" alt="Languages ranked by use, most used first" />
 <!-- langstats:end -->
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=4000&pause=100000&color=58a6ff&vCenter=true&multiline=false&width=950&height=24&lines=old+curiosities%2C+new+experiments+%E2%80%94+held+together+with+duct+tape+and+caffeine." />

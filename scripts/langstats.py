@@ -61,6 +61,12 @@ CELL_GAP = 2.6
 CELL_H = 9
 ICON = 14              # icon box, drawn from a 24x24 viewBox
 ICON_GAP = 8
+
+# One reveal, played once, on a surface a visitor sees for the first time.
+# Lit cells light up left to right over the dim track; the track never moves.
+CELL_ANIM_MS = 180
+CELL_STAGGER_MS = 8
+ROW_STAGGER_MS = 50
 SHOW_PERCENT = False   # the score is a blend, not a real share of code
 SHOW_FOOTER = False    # keep the chart generic, without repo or byte counts
 
@@ -183,11 +189,21 @@ def render_svg(ranked, scanned, total_bytes):
     for i, (name, pct) in enumerate(ranked):
         y = top + i * LINE_HEIGHT
         lit = max(1, round(CELLS * pct / top_pct))
-        cells = "".join(
-            f'<rect class="{"on" if k < lit else "off"}" '
-            f'x="{meter_x + k * (CELL_W + CELL_GAP):.1f}" y="{y - CELL_H + 1}" '
-            f'width="{CELL_W}" height="{CELL_H}" rx="1" />'
-            for k in range(CELLS)
+
+        def cell(k, cls, delay=None):
+            style = f' style="animation-delay:{delay}ms"' if delay is not None else ""
+            return (
+                f'<rect class="{cls}"{style} '
+                f'x="{meter_x + k * (CELL_W + CELL_GAP):.1f}" y="{y - CELL_H + 1}" '
+                f'width="{CELL_W}" height="{CELL_H}" rx="1" />'
+            )
+
+        # Full track first, lit cells over it, so a row reads as filling up
+        # rather than as missing segments while the reveal runs.
+        cells = "".join(cell(k, "off") for k in range(CELLS))
+        cells += "".join(
+            cell(k, "on", i * ROW_STAGGER_MS + k * CELL_STAGGER_MS)
+            for k in range(lit)
         )
         glyph = ""
         if name in icons:
@@ -214,8 +230,24 @@ def render_svg(ranked, scanned, total_bytes):
     .name, .prompt {{ fill: #8b949e; }}
     .pct {{ fill: #8b949e; text-anchor: end; }}
     .icon {{ fill: {ACCENT}; }}
-    .on {{ fill: {ACCENT}; }}
     .off {{ fill: {ACCENT}; opacity: 0.20; }}
+    .on {{
+      fill: {ACCENT};
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: lightup {CELL_ANIM_MS}ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    }}
+    @keyframes lightup {{
+      from {{ opacity: 0; transform: scale(0.85); }}
+      to   {{ opacity: 1; transform: scale(1); }}
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      .on {{
+        animation: fadein 200ms ease-out both;
+        animation-delay: 0ms !important;
+      }}
+      @keyframes fadein {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+    }}
     @media (prefers-color-scheme: light) {{
       .name, .pct, .prompt {{ fill: #57606a; }}
       .off {{ opacity: 0.22; }}
