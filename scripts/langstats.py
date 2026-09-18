@@ -17,7 +17,6 @@ USER = os.environ.get("LANGSTATS_USER", "MKS-01")
 README = os.environ.get("LANGSTATS_README", "README.md")
 
 TOP_N = 10         # languages to list
-BAR_WIDTH = 18     # characters in the bar
 # Private repos are counted when a token that can see them is supplied via
 # LANGSTATS_TOKEN. Only the language totals are used: no repo name, count,
 # description or byte figure from a private repo reaches the chart or the
@@ -54,7 +53,7 @@ END = "<!-- langstats:end -->"
 # GitHub strips inline CSS from README HTML, so the chart ships as an SVG in
 # this repo. Colors follow the README's own palette.
 # Sequential ramp: magnitude gets one hue, light to dark, shaded by value
-# (never by rank, or a language repaints when the daily order shifts). Each
+# (never by rank, or a language repaints when the ranking shifts). Each
 # scheme gets its own selected steps rather than one value reused, and every
 # step clears 3:1 against its surface.
 RAMP_DARK = ["#1f6feb", "#388bfd", "#4493f8", "#58a6ff"]
@@ -63,24 +62,18 @@ RAMP_DARK = ["#1f6feb", "#388bfd", "#4493f8", "#58a6ff"]
 # almost black instead of blue.
 RAMP_LIGHT = ["#0969da", "#0757ba", "#0a4faf", "#0a3980"]
 ICON_DARK, ICON_LIGHT = "#58a6ff", "#0969da"
-ACCENT = RAMP_DARK[-1]
 LINE_HEIGHT = 22
 FONT_SIZE = 13
 CHAR_W = 7.85          # advance width of the fallback monospace at 13px
-CELL = 9               # square size, GitHub's contribution-graph unit
-CELL_GAP = 3
-CELL_R = 2
-CELLS = 14             # squares per row — enough resolution, narrow canvas
+BAR_W = 88             # full-length track, i.e. what the top language fills
+BAR_H = 8
+BAR_R = 4              # half the height, so the caps are semicircles
+BAR_GAP = 16           # between the name column and its track
 ICON = 14              # icon box, drawn from a 24x24 viewBox
 ICON_GAP = 8
+COLUMNS = 2            # two short columns read better than one tall one
+COL_GAP = 30
 
-# One reveal, played once, on a surface a visitor sees for the first time.
-# Squares light up left to right over a dim, static grid.
-CELL_ANIM_MS = 260
-ROW_STAGGER_MS = 55
-CELL_STAGGER_MS = 10
-SHOW_PERCENT = False   # the score is a blend, not a real share of code
-SHOW_FOOTER = False    # keep the chart generic, without repo or byte counts
 
 
 def api(path):
@@ -114,8 +107,8 @@ def repo_page(page):
 
 
 def collect():
-    """Return {language: total_bytes}, {language: repo_count}, repos_scanned."""
-    totals, counts, scanned = {}, {}, 0
+    """Return {language: total_bytes}, {language: repo_count}."""
+    totals, counts = {}, {}
     page = 1
     while True:
         repos = repo_page(page)
@@ -134,12 +127,11 @@ def collect():
             langs = {k: v for k, v in langs.items() if k not in EXCLUDE}
             if not langs:
                 continue
-            scanned += 1
             for name, size in langs.items():
                 totals[name] = totals.get(name, 0) + size
                 counts[name] = counts.get(name, 0) + 1
         page += 1
-    return totals, counts, scanned
+    return totals, counts
 
 
 def rank(totals, counts):
@@ -168,64 +160,75 @@ def esc(text):
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def render_svg(ranked, scanned, total_bytes):
+def render_svg(ranked):
     icons = load_icons()
-    name_w = max(len(name) for name, _ in ranked)
-    name_x = ICON + ICON_GAP
-    grid_x = name_x + round(name_w * CHAR_W) + 16
-    grid_w = round(CELLS * (CELL + CELL_GAP) - CELL_GAP)
-    width = grid_x + grid_w + 4
+
+    # Fill column by column, so rank still reads top-to-bottom down the left
+    # column and continues down the right one.
+    per_col = -(-len(ranked) // COLUMNS)
+    cols = [ranked[c * per_col:(c + 1) * per_col] for c in range(COLUMNS)]
+    cols = [c for c in cols if c]
+
+    # Each column is sized to its own longest name, so a column of short
+    # names doesn't inherit the other's padding.
+    col_w, col_x, x = [], [], 0
+    for col in cols:
+        name_w = max(len(name) for name, _ in col)
+        w = ICON + ICON_GAP + round(name_w * CHAR_W) + BAR_GAP + BAR_W
+        col_w.append(w)
+        col_x.append(x)
+        x += w + COL_GAP
+
+    width = x - COL_GAP + 4
     top = LINE_HEIGHT * 2
     # Rows are baselines, so the last one sits at top + (n-1) * LINE_HEIGHT;
     # reserving a full row after it left a block of dead space below.
-    height = top + LINE_HEIGHT * (len(ranked) - 1) + 8
+    height = top + LINE_HEIGHT * (max(len(c) for c in cols) - 1) + 8
 
-    # Squares are scaled against the leading language rather than a full
-    # 100% grid: at true scale the top language fills under a third of the
-    # row and the tail is invisible. Ratios between languages are preserved.
+    # Bars are scaled against the leading language rather than a full 100%
+    # track: at true scale the top language fills under a third of the row
+    # and the tail is invisible. Ratios between languages are preserved.
     top_pct = max(pct for _, pct in ranked)
     summary = ", ".join(name for name, _ in ranked)
 
     rows = []
-    for i, (name, pct) in enumerate(ranked):
-        y = top + i * LINE_HEIGHT
-        ratio = pct / top_pct
-        lit = max(1, round(CELLS * ratio))
-        # Four buckets of the ramp, by value — never by rank.
-        shade = 3 if ratio >= 0.75 else 2 if ratio >= 0.5 else 1 if ratio >= 0.25 else 0
-        sq_y = y - CELL
+    for ci, col in enumerate(cols):
+        x0 = col_x[ci]
+        bar_x = x0 + col_w[ci] - BAR_W
+        for i, (name, pct) in enumerate(col):
+            y = top + i * LINE_HEIGHT
+            ratio = pct / top_pct
+            # Four buckets of the ramp, by value — never by rank.
+            shade = 3 if ratio >= 0.75 else 2 if ratio >= 0.5 else 1 if ratio >= 0.25 else 0
+            bar_y = y - BAR_H - 1
+            # Never shorter than one full cap, or a small value renders as a
+            # sliver that reads as a rendering fault rather than a low score.
+            lit_w = max(BAR_H, round(BAR_W * ratio))
 
-        def square(k, cls, delay=None):
-            style = f' style="animation-delay:{delay}ms"' if delay is not None else ""
-            return (
-                f'<rect class="{cls}"{style} '
-                f'x="{grid_x + k * (CELL + CELL_GAP)}" y="{sq_y}" '
-                f'width="{CELL}" height="{CELL}" rx="{CELL_R}" />'
+            # The chart is rebuilt once a week, so the bar is drawn in its
+            # final state: a dim full-width track with the value over it.
+            bars = (
+                f'<rect class="off" x="{bar_x}" y="{bar_y}" '
+                f'width="{BAR_W}" height="{BAR_H}" rx="{BAR_R}" />'
+                f'<rect class="on s{shade}" x="{bar_x}" y="{bar_y}" '
+                f'width="{lit_w}" height="{BAR_H}" rx="{BAR_R}" />'
             )
 
-        # Full grid first, lit squares over it, so a row reads as filling up
-        # rather than as missing squares while the reveal runs.
-        squares = "".join(square(k, "off") for k in range(CELLS))
-        squares += "".join(
-            square(k, f"on s{shade}", i * ROW_STAGGER_MS + k * CELL_STAGGER_MS)
-            for k in range(lit)
-        )
-
-        glyph = ""
-        if name in icons:
-            spec = icons[name]
-            grid = float(spec.get("viewBox", "0 0 24 24").split()[2])
-            scale = ICON / grid
-            paths = spec.get("paths") or [spec["d"]]
-            shapes = "".join(f'<path class="icon" d="{d}" />' for d in paths)
-            glyph = (
-                f'<g transform="translate(0,{y - ICON + 2}) scale({scale:.4f})">'
-                f'{shapes}</g>'
+            glyph = ""
+            if name in icons:
+                spec = icons[name]
+                grid = float(spec.get("viewBox", "0 0 24 24").split()[2])
+                scale = ICON / grid
+                paths = spec.get("paths") or [spec["d"]]
+                shapes = "".join(f'<path class="icon" d="{d}" />' for d in paths)
+                glyph = (
+                    f'<g transform="translate({x0},{y - ICON + 2}) scale({scale:.4f})">'
+                    f'{shapes}</g>'
+                )
+            rows.append(
+                f'  {glyph}<text class="name" x="{x0 + ICON + ICON_GAP}" y="{y}">'
+                f'{esc(name)}</text>\n  {bars}'
             )
-        rows.append(
-            f'  {glyph}<text class="name" x="{name_x}" y="{y}">{esc(name)}</text>\n'
-            f'  {squares}'
-        )
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
      viewBox="0 0 {width} {height}" role="img" aria-label="Languages by use, most used first: {esc(summary)}">
@@ -241,28 +244,7 @@ def render_svg(ranked, scanned, total_bytes):
     .s1 {{ fill: {RAMP_DARK[1]}; }}
     .s2 {{ fill: {RAMP_DARK[2]}; }}
     .s3 {{ fill: {RAMP_DARK[3]}; }}
-    /* forwards, not both, and a full-opacity resting style: "both" applies
-       the from-keyframe during the pre-play delay, so a renderer that
-       parses the animation but never ticks its timeline — some static SVG
-       rasterizers, some markdown clients — would show every lit square
-       stuck dim. "forwards" leaves the delay period on the square's own
-       resting style (opacity 1 below), so those renderers fall back to
-       the correct full color instead of a washed-out one. */
-    .on {{
-      opacity: 1;
-      animation: lightup {CELL_ANIM_MS}ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    }}
-    @keyframes lightup {{
-      from {{ opacity: 0.35; }}
-      to   {{ opacity: 1; }}
-    }}
-    @media (prefers-reduced-motion: reduce) {{
-      .on {{
-        animation: fadein 200ms ease-out forwards;
-        animation-delay: 0ms !important;
-      }}
-      @keyframes fadein {{ from {{ opacity: 0.35; }} to {{ opacity: 1; }} }}
-    }}
+    .on {{ opacity: 1; }}
     @media (prefers-color-scheme: light) {{
       .name, .prompt {{ fill: #57606a; }}
       .icon {{ fill: {ICON_LIGHT}; }}
@@ -295,7 +277,7 @@ def render_readme_block(svg):
 
 def main():
     try:
-        totals, counts, scanned = collect()
+        totals, counts = collect()
     except urllib.error.HTTPError as exc:
         print(f"github api error: {exc.code} {exc.reason}", file=sys.stderr)
         return 1
@@ -304,7 +286,7 @@ def main():
         return 1
 
     ranked = rank(totals, counts)
-    svg = render_svg(ranked, scanned, sum(totals.values()))
+    svg = render_svg(ranked)
     changed = False
 
     os.makedirs(os.path.dirname(SVG_PATH) or ".", exist_ok=True)

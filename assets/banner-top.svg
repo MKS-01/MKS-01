@@ -5,17 +5,6 @@
     @media (prefers-color-scheme: light) {
       text { fill: #0969da; }
     }
-    /* forwards, not both: "both" applies the from-keyframe (opacity 0)
-       during the pre-play delay, so a renderer that parses the animation
-       but never ticks its timeline — some static SVG rasterizers, some
-       markdown clients — shows every character invisible. "forwards"
-       leaves the delay period on the element's own resting style, which
-       is full opacity by default, so those renderers fall back correct. */
-    tspan { opacity: 1; animation: appear 90ms ease-out forwards; }
-    @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
-    @media (prefers-reduced-motion: reduce) {
-      tspan { animation: appear 200ms ease-out forwards; animation-delay: 0ms !important; }
-    }
   </style>
-  <text x="1" y="14" xml:space="preserve"><tspan style="animation-delay:0ms">🧊</tspan><tspan style="animation-delay:55ms">☕</tspan><tspan> </tspan><tspan style="animation-delay:165ms">c</tspan><tspan style="animation-delay:220ms">o</tspan><tspan style="animation-delay:275ms">f</tspan><tspan style="animation-delay:330ms">f</tspan><tspan style="animation-delay:385ms">e</tspan><tspan style="animation-delay:440ms">e</tspan><tspan> </tspan><tspan style="animation-delay:550ms">→</tspan><tspan> </tspan><tspan style="animation-delay:660ms">💻</tspan><tspan> </tspan><tspan style="animation-delay:770ms">c</tspan><tspan style="animation-delay:825ms">o</tspan><tspan style="animation-delay:880ms">d</tspan><tspan style="animation-delay:935ms">e</tspan><tspan> </tspan><tspan style="animation-delay:1045ms">→</tspan><tspan> </tspan><tspan style="animation-delay:1155ms">🔧</tspan><tspan> </tspan><tspan style="animation-delay:1265ms">t</tspan><tspan style="animation-delay:1320ms">i</tspan><tspan style="animation-delay:1375ms">n</tspan><tspan style="animation-delay:1430ms">k</tspan><tspan style="animation-delay:1485ms">e</tspan><tspan style="animation-delay:1540ms">r</tspan><tspan> </tspan><tspan style="animation-delay:1650ms">→</tspan><tspan> </tspan><tspan style="animation-delay:1760ms">r</tspan><tspan style="animation-delay:1815ms">e</tspan><tspan style="animation-delay:1870ms">p</tspan><tspan style="animation-delay:1925ms">e</tspan><tspan style="animation-delay:1980ms">a</tspan><tspan style="animation-delay:2035ms">t</tspan></text>
+  <text x="1" y="14" xml:space="preserve">🧊☕ coffee → 💻 code → 🔧 tinker → repeat</text>
 </svg>
