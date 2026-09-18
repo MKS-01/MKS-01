@@ -11,5 +11,5 @@ func main() {
 `m0b1l3` `s3cur1ty` `71nk3r3r` `bu1ld3r`
 
 <!-- langstats:start -->
-<img src="assets/langstats.svg?v=8efe8ea391" alt="Languages ranked by use, most used first" />
+<img src="assets/langstats.svg?v=a8a3faedb2" alt="Languages ranked by use, most used first" />
 <!-- langstats:end -->
