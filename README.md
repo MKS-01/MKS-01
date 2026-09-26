@@ -12,7 +12,7 @@ func main() {
 
 <!-- langstats:start -->
 ```console
-$ ls ~/languages
-Kotlin  JavaScript  Go  TypeScript  Python  Shell
+$ ls ~/languages   # past 7 days
+Kotlin  Swift  TypeScript  JavaScript  Shell
 ```
 <!-- langstats:end -->

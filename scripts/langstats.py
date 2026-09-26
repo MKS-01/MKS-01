@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
-"""Rebuild the language-usage block in README.md from GitHub repo language bytes.
+"""Rebuild the language-usage block in README.md from this week's commits.
 
 Talks only to api.github.com and rewrites the text between the langstats
 markers, so the README has no third-party render server in its critical path.
+
+This looks at *recent activity*, not lifetime totals: it walks commits
+authored by USER in the last WINDOW_DAYS across all owned repos, maps each
+changed file's extension to a language, and ranks by lines touched. A repo
+that's 90% JavaScript by history but untouched this week contributes nothing;
+one stray Kotlin fix this week outranks it. That also means a quiet week
+shows fewer languages, or none at all, and that's shown honestly rather than
+padded out with old totals.
 """
 
 import json
@@ -11,32 +19,53 @@ import re
 import sys
 import urllib.error
 import urllib.request
+from datetime import datetime, timedelta, timezone
 
 USER = os.environ.get("LANGSTATS_USER", "MKS-01")
 README = os.environ.get("LANGSTATS_README", "README.md")
 
 TOP_N = 6          # languages to list
-# Private repos are counted when a token that can see them is supplied via
-# LANGSTATS_TOKEN. Only the language totals are used: no repo name, count,
-# description or byte figure from a private repo reaches the chart or the
-# logs. Note the aggregate is still a disclosure — a language that exists
-# only in a private repo becomes visible by appearing at all.
-INCLUDE_PRIVATE = True
+WINDOW_DAYS = 7    # how far back to look for commits
 
-# A 92 MB JavaScript repo shouldn't drown out six Kotlin ones, so blend raw
-# byte share with how many repos the language shows up in (both weights
-# together should add up to 1.0; 1/0 is pure bytes, 0/1 is pure repo count).
-SIZE_WEIGHT = 0.85
-COUNT_WEIGHT = 0.15
+# Private repos are counted when a token that can see them is supplied via
+# LANGSTATS_TOKEN. Only language names and line-change counts are used: no
+# repo name, commit message, or diff content from a private repo reaches the
+# README or the logs. Note the aggregate is still a disclosure — a language
+# that exists only in a private repo becomes visible by appearing at all.
+INCLUDE_PRIVATE = True
 
 # This repo only holds the generator, so counting it would let the chart
 # measure itself. Names are matched case-insensitively.
 EXCLUDE_REPOS = {"mks-01"}
 
-# Build-system and markup noise that says nothing about what MKS writes.
-EXCLUDE = {
-    "HTML", "CSS", "SCSS", "Makefile", "CMake", "Dockerfile", "Batchfile",
-    "Starlark", "Roff", "TeX", "Vim Script", "PowerShell", "Ruby",
+# Bounds the number of per-commit API calls a single run makes, so a heavy
+# week (or a bulk-import commit) can't blow the run past GitHub's rate limit
+# or turn a weekly job into a long one.
+MAX_COMMITS = 250
+
+# Extension -> language, covering what MKS actually writes. Deliberately
+# narrow and extension-only (no content sniffing like GitHub's own Linguist),
+# so anything not listed here — markup, build config, generated files,
+# lockfiles — is silently left out rather than guessed at.
+EXT_LANG = {
+    ".py": "Python",
+    ".js": "JavaScript", ".jsx": "JavaScript", ".mjs": "JavaScript", ".cjs": "JavaScript",
+    ".ts": "TypeScript", ".tsx": "TypeScript",
+    ".go": "Go",
+    ".kt": "Kotlin", ".kts": "Kotlin",
+    ".java": "Java",
+    ".swift": "Swift",
+    ".c": "C", ".h": "C",
+    ".cpp": "C++", ".cc": "C++", ".cxx": "C++", ".hpp": "C++", ".hh": "C++",
+    ".m": "Objective-C", ".mm": "Objective-C",
+    ".sh": "Shell", ".bash": "Shell", ".zsh": "Shell",
+    ".rs": "Rust",
+    ".php": "PHP",
+    ".cs": "C#",
+    ".dart": "Dart",
+    ".lua": "Lua",
+    ".scala": "Scala",
+    ".rb": "Ruby",
 }
 
 START = "<!-- langstats:start -->"
@@ -59,60 +88,89 @@ def api(path):
 
 
 def repo_page(page):
-    """One page of owned repos, including private ones when the token allows."""
+    """One page of owned repos, sorted most-recently-pushed first so the
+    commit budget below goes to repos likely to have this week's activity,
+    including private ones when the token allows."""
     if INCLUDE_PRIVATE and os.environ.get("LANGSTATS_TOKEN"):
         try:
             return api(
-                "/user/repos?per_page=100&affiliation=owner"
-                f"&visibility=all&page={page}"
+                "/user/repos?per_page=100&affiliation=owner&visibility=all"
+                f"&sort=pushed&direction=desc&page={page}"
             )
         except urllib.error.HTTPError as exc:
             if exc.code not in (401, 403):
                 raise
             print("token cannot list private repos, using public only", file=sys.stderr)
-    return api(f"/users/{USER}/repos?per_page=100&type=owner&page={page}")
+    return api(
+        f"/users/{USER}/repos?per_page=100&type=owner"
+        f"&sort=pushed&direction=desc&page={page}"
+    )
 
 
-def collect():
-    """Return {language: total_bytes}, {language: repo_count}."""
-    totals, counts = {}, {}
+def repos():
     page = 1
     while True:
-        repos = repo_page(page)
-        if not repos:
-            break
-        for repo in repos:
-            if repo["fork"]:          # someone else's code
-                continue
-            if repo.get("archived"):
+        batch = repo_page(page)
+        if not batch:
+            return
+        for repo in batch:
+            if repo["fork"] or repo.get("archived"):
                 continue
             if repo.get("private") and not INCLUDE_PRIVATE:
                 continue
             if repo["name"].lower() in EXCLUDE_REPOS:
                 continue
-            langs = api(f"/repos/{repo['full_name']}/languages")
-            langs = {k: v for k, v in langs.items() if k not in EXCLUDE}
-            if not langs:
-                continue
-            for name, size in langs.items():
-                totals[name] = totals.get(name, 0) + size
-                counts[name] = counts.get(name, 0) + 1
+            yield repo
         page += 1
-    return totals, counts
 
 
-def rank(totals, counts):
-    """Blend byte share and repo spread into a percentage per language."""
-    total_bytes = sum(totals.values()) or 1
-    total_repos = sum(counts.values()) or 1
-    scores = {
-        name: ((size / total_bytes) ** SIZE_WEIGHT)
-        * ((counts[name] / total_repos) ** COUNT_WEIGHT)
-        for name, size in totals.items()
-    }
-    top = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:TOP_N]
-    shown = sum(score for _, score in top) or 1
-    return [(name, 100 * score / shown) for name, score in top]
+def collect_week():
+    """{language: lines touched} from commits authored by USER in the last
+    WINDOW_DAYS, capped at MAX_COMMITS commits total across all repos."""
+    since = (datetime.now(timezone.utc) - timedelta(days=WINDOW_DAYS)).strftime(
+        "%Y-%m-%dT%H:%M:%SZ"
+    )
+    weights = {}
+    budget = MAX_COMMITS
+    for repo in repos():
+        if budget <= 0:
+            break
+        page = 1
+        while budget > 0:
+            try:
+                commits = api(
+                    f"/repos/{repo['full_name']}/commits"
+                    f"?since={since}&author={USER}&per_page=100&page={page}"
+                )
+            except urllib.error.HTTPError as exc:
+                if exc.code in (409, 404):   # empty repo, or no access
+                    break
+                raise
+            if not commits:
+                break
+            for commit in commits:
+                if budget <= 0:
+                    break
+                budget -= 1
+                try:
+                    detail = api(f"/repos/{repo['full_name']}/commits/{commit['sha']}")
+                except urllib.error.HTTPError:
+                    continue
+                for f in detail.get("files") or []:
+                    ext = os.path.splitext(f.get("filename", ""))[1].lower()
+                    lang = EXT_LANG.get(ext)
+                    if not lang:
+                        continue
+                    changed = f.get("changes", f.get("additions", 0) + f.get("deletions", 0))
+                    weights[lang] = weights.get(lang, 0) + changed
+            if len(commits) < 100:
+                break
+            page += 1
+    return weights
+
+
+def rank(weights):
+    return sorted(weights.items(), key=lambda kv: kv[1], reverse=True)[:TOP_N]
 
 
 TERM_WIDTH = 80    # assumed terminal width, for column layout
@@ -147,31 +205,25 @@ def columnize(names, width=TERM_WIDTH, gap=COL_GAP):
 
 
 def render_readme_block(ranked):
-    # Plain text in a code block, laid out in `ls`-style columns (down each
-    # column, then across) rather than one line of names: no image to
-    # cache-bust, nothing that can fail to render.
-    lines = columnize([name for name, _ in ranked])
-    return "\n".join([
-        START,
-        "```console",
-        "$ ls ~/languages",
-        *lines,
-        "```",
-        END,
-    ])
+    # Trailing comment on the command line itself, not an extra line: this
+    # is a real 7-day window, not just how often the job re-runs, so say
+    # what the data covers rather than how often it's rebuilt.
+    prompt = "$ ls ~/languages   # past 7 days"
+    if not ranked:
+        lines = ["# quiet week — no commits in the last 7 days"]
+    else:
+        lines = columnize([name for name, _ in ranked])
+    return "\n".join([START, "```console", prompt, *lines, "```", END])
 
 
 def main():
     try:
-        totals, counts = collect()
+        weights = collect_week()
     except urllib.error.HTTPError as exc:
         print(f"github api error: {exc.code} {exc.reason}", file=sys.stderr)
         return 1
-    if not totals:
-        print("no language data found", file=sys.stderr)
-        return 1
 
-    ranked = rank(totals, counts)
+    ranked = rank(weights)
     block = render_readme_block(ranked)
 
     with open(README, encoding="utf-8") as fh:

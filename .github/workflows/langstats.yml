@@ -2,7 +2,9 @@ name: langstats
 
 on:
   schedule:
-    - cron: "17 4 * * 1"   # weekly, Mondays 04:17 UTC
+    # Daily, not weekly: the block shows a rolling last-7-days window, so a
+    # weekly cron would leave it up to 6 days stale between runs.
+    - cron: "17 4 * * *"   # daily, 04:17 UTC
   workflow_dispatch:
   push:
     branches: [main]
