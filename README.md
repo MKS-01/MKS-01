@@ -13,6 +13,6 @@ func main() {
 <!-- langstats:start -->
 ```console
 $ ls ~/languages
-JavaScript  Kotlin  TypeScript  Go  Java  Shell
+Kotlin  JavaScript  Go  TypeScript  Python  Shell
 ```
 <!-- langstats:end -->
