@@ -16,7 +16,7 @@ import urllib.request
 USER = os.environ.get("LANGSTATS_USER", "MKS-01")
 README = os.environ.get("LANGSTATS_README", "README.md")
 
-TOP_N = 10         # languages to list
+TOP_N = 6          # languages to list
 # Private repos are counted when a token that can see them is supplied via
 # LANGSTATS_TOKEN. Only the language totals are used: no repo name, count,
 # description or byte figure from a private repo reaches the chart or the
@@ -41,39 +41,19 @@ EXCLUDE = {
 }
 
 SVG_PATH = os.environ.get("LANGSTATS_SVG", "assets/langstats.svg")
-
-# Icon outlines vendored from Simple Icons (CC0) and devicon (MIT) so
-# nothing is fetched at build or render time. Each entry carries its own
-# viewBox, since the two sets use different grids. A language with no icon
-# simply renders its name.
-ICONS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icons.json")
 START = "<!-- langstats:start -->"
 END = "<!-- langstats:end -->"
 
 # GitHub strips inline CSS from README HTML, so the chart ships as an SVG in
-# this repo. Colors follow the README's own palette.
-# Sequential ramp: magnitude gets one hue, light to dark, shaded by value
-# (never by rank, or a language repaints when the ranking shifts). Each
-# scheme gets its own selected steps rather than one value reused, and every
-# step clears 3:1 against its surface.
-RAMP_DARK = ["#1f6feb", "#388bfd", "#4493f8", "#58a6ff"]
-# Capped short of navy-black: going darker by value is the textbook
-# sequential move, but running it to the floor painted the leading square
-# almost black instead of blue.
-RAMP_LIGHT = ["#0969da", "#0757ba", "#0a4faf", "#0a3980"]
-ICON_DARK, ICON_LIGHT = "#58a6ff", "#0969da"
-LINE_HEIGHT = 22
+# this repo. One accent per scheme, matching the banner; bars are scaled
+# against the leading language so the tail stays visible.
+ACCENT_DARK, ACCENT_LIGHT = "#58a6ff", "#0969da"
+MUTED_DARK, MUTED_LIGHT = "#8b949e", "#57606a"
 FONT_SIZE = 13
 CHAR_W = 7.85          # advance width of the fallback monospace at 13px
-BAR_W = 88             # full-length track, i.e. what the top language fills
-BAR_H = 8
-BAR_R = 4              # half the height, so the caps are semicircles
-BAR_GAP = 16           # between the name column and its track
-ICON = 14              # icon box, drawn from a 24x24 viewBox
-ICON_GAP = 8
-COLUMNS = 2            # two short columns read better than one tall one
-COL_GAP = 30
-
+LINE_HEIGHT = 22
+BAR_W = 180
+BAR_H = 6
 
 
 def api(path):
@@ -148,87 +128,31 @@ def rank(totals, counts):
     return [(name, 100 * score / shown) for name, score in top]
 
 
-def load_icons():
-    try:
-        with open(ICONS_PATH, encoding="utf-8") as fh:
-            return json.load(fh)
-    except (OSError, ValueError):
-        return {}
-
-
 def esc(text):
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def render_svg(ranked):
-    icons = load_icons()
-
-    # Fill column by column, so rank still reads top-to-bottom down the left
-    # column and continues down the right one.
-    per_col = -(-len(ranked) // COLUMNS)
-    cols = [ranked[c * per_col:(c + 1) * per_col] for c in range(COLUMNS)]
-    cols = [c for c in cols if c]
-
-    # Each column is sized to its own longest name, so a column of short
-    # names doesn't inherit the other's padding.
-    col_w, col_x, x = [], [], 0
-    for col in cols:
-        name_w = max(len(name) for name, _ in col)
-        w = ICON + ICON_GAP + round(name_w * CHAR_W) + BAR_GAP + BAR_W
-        col_w.append(w)
-        col_x.append(x)
-        x += w + COL_GAP
-
-    width = x - COL_GAP + 4
+    name_w = round(max(len(name) for name, _ in ranked) * CHAR_W)
+    bar_x = name_w + 16
+    width = bar_x + BAR_W + 2
     top = LINE_HEIGHT * 2
-    # Rows are baselines, so the last one sits at top + (n-1) * LINE_HEIGHT;
-    # reserving a full row after it left a block of dead space below.
-    height = top + LINE_HEIGHT * (max(len(c) for c in cols) - 1) + 8
-
-    # Bars are scaled against the leading language rather than a full 100%
-    # track: at true scale the top language fills under a third of the row
-    # and the tail is invisible. Ratios between languages are preserved.
-    top_pct = max(pct for _, pct in ranked)
+    height = top + LINE_HEIGHT * (len(ranked) - 1) + 8
+    lead = max(pct for _, pct in ranked)
     summary = ", ".join(name for name, _ in ranked)
 
     rows = []
-    for ci, col in enumerate(cols):
-        x0 = col_x[ci]
-        bar_x = x0 + col_w[ci] - BAR_W
-        for i, (name, pct) in enumerate(col):
-            y = top + i * LINE_HEIGHT
-            ratio = pct / top_pct
-            # Four buckets of the ramp, by value — never by rank.
-            shade = 3 if ratio >= 0.75 else 2 if ratio >= 0.5 else 1 if ratio >= 0.25 else 0
-            bar_y = y - BAR_H - 1
-            # Never shorter than one full cap, or a small value renders as a
-            # sliver that reads as a rendering fault rather than a low score.
-            lit_w = max(BAR_H, round(BAR_W * ratio))
-
-            # The chart is rebuilt once a week, so the bar is drawn in its
-            # final state: a dim full-width track with the value over it.
-            bars = (
-                f'<rect class="off" x="{bar_x}" y="{bar_y}" '
-                f'width="{BAR_W}" height="{BAR_H}" rx="{BAR_R}" />'
-                f'<rect class="on s{shade}" x="{bar_x}" y="{bar_y}" '
-                f'width="{lit_w}" height="{BAR_H}" rx="{BAR_R}" />'
-            )
-
-            glyph = ""
-            if name in icons:
-                spec = icons[name]
-                grid = float(spec.get("viewBox", "0 0 24 24").split()[2])
-                scale = ICON / grid
-                paths = spec.get("paths") or [spec["d"]]
-                shapes = "".join(f'<path class="icon" d="{d}" />' for d in paths)
-                glyph = (
-                    f'<g transform="translate({x0},{y - ICON + 2}) scale({scale:.4f})">'
-                    f'{shapes}</g>'
-                )
-            rows.append(
-                f'  {glyph}<text class="name" x="{x0 + ICON + ICON_GAP}" y="{y}">'
-                f'{esc(name)}</text>\n  {bars}'
-            )
+    for i, (name, pct) in enumerate(ranked):
+        y = top + i * LINE_HEIGHT
+        bar_y = y - 4 - BAR_H // 2   # centred on the text's x-height
+        fill = max(BAR_H, round(BAR_W * pct / lead))
+        rows.append(
+            f'  <text class="name" x="1" y="{y}">{esc(name)}</text>\n'
+            f'  <rect class="track" x="{bar_x}" y="{bar_y}" width="{BAR_W}" '
+            f'height="{BAR_H}" rx="{BAR_H / 2:g}" />\n'
+            f'  <rect class="bar" x="{bar_x}" y="{bar_y}" width="{fill}" '
+            f'height="{BAR_H}" rx="{BAR_H / 2:g}" />'
+        )
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
      viewBox="0 0 {width} {height}" role="img" aria-label="Languages by use, most used first: {esc(summary)}">
@@ -236,26 +160,16 @@ def render_svg(ranked):
     text {{
       font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
       font-size: {FONT_SIZE}px;
+      fill: {MUTED_DARK};
     }}
-    .name, .prompt {{ fill: #8b949e; }}
-    .icon {{ fill: {ICON_DARK}; }}
-    .off {{ fill: {ICON_DARK}; opacity: 0.15; }}
-    .s0 {{ fill: {RAMP_DARK[0]}; }}
-    .s1 {{ fill: {RAMP_DARK[1]}; }}
-    .s2 {{ fill: {RAMP_DARK[2]}; }}
-    .s3 {{ fill: {RAMP_DARK[3]}; }}
-    .on {{ opacity: 1; }}
+    .bar {{ fill: {ACCENT_DARK}; }}
+    .track {{ fill: {ACCENT_DARK}; opacity: 0.15; }}
     @media (prefers-color-scheme: light) {{
-      .name, .prompt {{ fill: #57606a; }}
-      .icon {{ fill: {ICON_LIGHT}; }}
-      .off {{ fill: {ICON_LIGHT}; opacity: 0.13; }}
-      .s0 {{ fill: {RAMP_LIGHT[0]}; }}
-      .s1 {{ fill: {RAMP_LIGHT[1]}; }}
-      .s2 {{ fill: {RAMP_LIGHT[2]}; }}
-      .s3 {{ fill: {RAMP_LIGHT[3]}; }}
+      text {{ fill: {MUTED_LIGHT}; }}
+      .bar, .track {{ fill: {ACCENT_LIGHT}; }}
     }}
   </style>
-  <text class="prompt" x="1" y="{LINE_HEIGHT - 6}">$ ls -l ~/languages</text>
+  <text x="1" y="{LINE_HEIGHT - 6}">$ ls ~/languages</text>
 {chr(10).join(rows)}
 </svg>
 """
