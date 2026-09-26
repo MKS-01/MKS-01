@@ -5,7 +5,6 @@ Talks only to api.github.com and rewrites the text between the langstats
 markers, so the README has no third-party render server in its critical path.
 """
 
-import hashlib
 import json
 import os
 import re
@@ -40,20 +39,8 @@ EXCLUDE = {
     "Starlark", "Roff", "TeX", "Vim Script", "PowerShell", "Ruby",
 }
 
-SVG_PATH = os.environ.get("LANGSTATS_SVG", "assets/langstats.svg")
 START = "<!-- langstats:start -->"
 END = "<!-- langstats:end -->"
-
-# GitHub strips inline CSS from README HTML, so the chart ships as an SVG in
-# this repo. One accent per scheme, matching the banner; bars are scaled
-# against the leading language so the tail stays visible.
-ACCENT_DARK, ACCENT_LIGHT = "#58a6ff", "#0969da"
-MUTED_DARK, MUTED_LIGHT = "#8b949e", "#57606a"
-FONT_SIZE = 13
-CHAR_W = 7.85          # advance width of the fallback monospace at 13px
-LINE_HEIGHT = 22
-BAR_W = 180
-BAR_H = 6
 
 
 def api(path):
@@ -128,63 +115,16 @@ def rank(totals, counts):
     return [(name, 100 * score / shown) for name, score in top]
 
 
-def esc(text):
-    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-
-
-def render_svg(ranked):
-    name_w = round(max(len(name) for name, _ in ranked) * CHAR_W)
-    bar_x = name_w + 16
-    width = bar_x + BAR_W + 2
-    top = LINE_HEIGHT * 2
-    height = top + LINE_HEIGHT * (len(ranked) - 1) + 8
-    lead = max(pct for _, pct in ranked)
-    summary = ", ".join(name for name, _ in ranked)
-
-    rows = []
-    for i, (name, pct) in enumerate(ranked):
-        y = top + i * LINE_HEIGHT
-        bar_y = y - 4 - BAR_H // 2   # centred on the text's x-height
-        fill = max(BAR_H, round(BAR_W * pct / lead))
-        rows.append(
-            f'  <text class="name" x="1" y="{y}">{esc(name)}</text>\n'
-            f'  <rect class="track" x="{bar_x}" y="{bar_y}" width="{BAR_W}" '
-            f'height="{BAR_H}" rx="{BAR_H / 2:g}" />\n'
-            f'  <rect class="bar" x="{bar_x}" y="{bar_y}" width="{fill}" '
-            f'height="{BAR_H}" rx="{BAR_H / 2:g}" />'
-        )
-
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
-     viewBox="0 0 {width} {height}" role="img" aria-label="Languages by use, most used first: {esc(summary)}">
-  <style>
-    text {{
-      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-      font-size: {FONT_SIZE}px;
-      fill: {MUTED_DARK};
-    }}
-    .bar {{ fill: {ACCENT_DARK}; }}
-    .track {{ fill: {ACCENT_DARK}; opacity: 0.15; }}
-    @media (prefers-color-scheme: light) {{
-      text {{ fill: {MUTED_LIGHT}; }}
-      .bar, .track {{ fill: {ACCENT_LIGHT}; }}
-    }}
-  </style>
-  <text x="1" y="{LINE_HEIGHT - 6}">$ ls ~/languages</text>
-{chr(10).join(rows)}
-</svg>
-"""
-
-
-def render_readme_block(svg):
-    # Browsers and GitHub's image proxy cache by URL, so a chart republished
-    # at a fixed path keeps serving the old bytes. Fingerprint the URL with
-    # the content hash: it only changes when the chart does, and when it
-    # changes nothing has cached it yet.
-    digest = hashlib.sha256(svg.encode("utf-8")).hexdigest()[:10]
+def render_readme_block(ranked):
+    # Plain text in a code block: no image to cache-bust, nothing that can
+    # fail to render, and it reads like the rest of the profile.
+    names = "  ".join(name for name, _ in ranked)
     return "\n".join([
         START,
-        f'<img src="{SVG_PATH}?v={digest}" '
-        f'alt="Languages ranked by use, most used first" />',
+        "```console",
+        "$ ls ~/languages",
+        names,
+        "```",
         END,
     ])
 
@@ -200,20 +140,7 @@ def main():
         return 1
 
     ranked = rank(totals, counts)
-    svg = render_svg(ranked)
-    changed = False
-
-    os.makedirs(os.path.dirname(SVG_PATH) or ".", exist_ok=True)
-    existing = ""
-    if os.path.exists(SVG_PATH):
-        with open(SVG_PATH, encoding="utf-8") as fh:
-            existing = fh.read()
-    if existing != svg:
-        with open(SVG_PATH, "w", encoding="utf-8") as fh:
-            fh.write(svg)
-        changed = True
-
-    block = render_readme_block(svg)
+    block = render_readme_block(ranked)
 
     with open(README, encoding="utf-8") as fh:
         readme = fh.read()
@@ -224,12 +151,12 @@ def main():
         re.escape(START) + r".*?" + re.escape(END), lambda _: block, readme, flags=re.S
     )
 
-    if updated != readme:
-        with open(README, "w", encoding="utf-8") as fh:
-            fh.write(updated)
-        changed = True
-
-    print("updated" if changed else "no change")
+    if updated == readme:
+        print("no change")
+        return 0
+    with open(README, "w", encoding="utf-8") as fh:
+        fh.write(updated)
+    print("updated")
     return 0
 
 

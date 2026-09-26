@@ -32,8 +32,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # README.md and the chart SVG are both generated output, so always
-          # rebuild them on top of the latest branch tip. A concurrent edit
+          # README.md is generated output, so always rebuild it on top of
+          # the latest branch tip. A concurrent edit
           # then costs a retry instead of a merge conflict.
           for attempt in 1 2 3; do
             git fetch origin "$BRANCH"
@@ -41,15 +41,12 @@ jobs:
 
             python3 scripts/langstats.py
 
-            # Both files, not just the README: the README's ?v= fingerprint is
-            # a hash of the SVG's bytes, so committing one without the other
-            # points the cache-buster at an image that was never pushed.
-            if [ -z "$(git status --porcelain README.md assets/langstats.svg)" ]; then
+            if [ -z "$(git status --porcelain README.md)" ]; then
               echo "no change"
               exit 0
             fi
 
-            git add README.md assets/langstats.svg
+            git add README.md
             git commit -m "Update language stats"
 
             if git push origin "HEAD:$BRANCH"; then
