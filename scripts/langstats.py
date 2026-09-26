@@ -115,15 +115,47 @@ def rank(totals, counts):
     return [(name, 100 * score / shown) for name, score in top]
 
 
+TERM_WIDTH = 80    # assumed terminal width, for column layout
+COL_GAP = 2        # spaces between columns, matching real `ls`
+
+
+def columnize(names, width=TERM_WIDTH, gap=COL_GAP):
+    """Lay names out the way `ls` does: down each column, then across,
+    using as many columns as fit the assumed terminal width."""
+    n = len(names)
+    for cols in range(min(n, width), 0, -1):
+        rows = -(-n // cols)
+        if (cols - 1) * rows >= n:
+            continue   # trailing column would be empty at this column count
+        col_widths = [
+            max(len(names[c * rows + r]) for r in range(rows)
+                if c * rows + r < n)
+            for c in range(cols)
+        ]
+        total = sum(col_widths) + gap * (cols - 1)
+        if total <= width:
+            lines = []
+            for r in range(rows):
+                cells = []
+                for c in range(cols):
+                    i = c * rows + r
+                    if i < n:
+                        cells.append(names[i].ljust(col_widths[c]))
+                lines.append((" " * gap).join(cells).rstrip())
+            return lines
+    return names
+
+
 def render_readme_block(ranked):
-    # Plain text in a code block: no image to cache-bust, nothing that can
-    # fail to render, and it reads like the rest of the profile.
-    names = "  ".join(name for name, _ in ranked)
+    # Plain text in a code block, laid out in `ls`-style columns (down each
+    # column, then across) rather than one line of names: no image to
+    # cache-bust, nothing that can fail to render.
+    lines = columnize([name for name, _ in ranked])
     return "\n".join([
         START,
         "```console",
         "$ ls ~/languages",
-        names,
+        *lines,
         "```",
         END,
     ])
