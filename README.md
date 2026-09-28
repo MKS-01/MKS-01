@@ -13,6 +13,6 @@ func main() {
 <!-- langstats:start -->
 ```console
 $ ls ~/languages   # past 7 days
-TypeScript  Shell
+# quiet week — no commits in the last 7 days
 ```
 <!-- langstats:end -->
