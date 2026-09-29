@@ -13,6 +13,6 @@ func main() {
 <!-- langstats:start -->
 ```console
 $ ls ~/languages   # past 7 days
-# quiet week — no commits in the last 7 days
+Kotlin  Swift
 ```
 <!-- langstats:end -->
