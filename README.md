@@ -13,6 +13,6 @@ func main() {
 <!-- langstats:start -->
 ```console
 $ ls ~/languages   # past 7 days
-Python  TypeScript  Kotlin
+Python  TypeScript
 ```
 <!-- langstats:end -->
